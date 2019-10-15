@@ -1,6 +1,6 @@
 # DTL (Dungeon Template Library) for Unity [![BSL-1.0](https://img.shields.io/badge/license-BSL--1.0-blue.svg)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
 
-[![Logo-GIF](https://kasugaccho.github.io/DungeonPicture/Picture/Unity/unity.png)](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)
+[![Logo-GIF](https://kasugaccho.github.io/DungeonPicture/Picture/Unity/unity.png)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
 ---
 
@@ -16,15 +16,15 @@
 
 ---
 
-## [API reference 📚](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)
+## [API reference 📚](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
-[**>> API reference 📚**](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)
+[**>> API reference 📚**](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
-[**>> Version History 📜**](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/Version-History)
+[**>> Version History 📜**](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/Version-History)
 
-[**>> Roadmap 🏛**](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/Roadmap)
+[**>> Roadmap 🏛**](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/Roadmap)
 
-[![API reference](https://github.com/Kasugaccho/DungeonPicture/blob/master/Picture/UE4/psi480.gif)](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)
+[![API reference](https://github.com/Kasugaccho/DungeonPicture/blob/master/Picture/UE4/psi480.gif)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
 ---
 
@@ -64,5 +64,5 @@ Distributed under the Boost Software License, Version 1.0.(See accompanying file
 |:---|:---|
 |Twitter:|null|
 |![svg](https://Kasugaccho.github.io/DungeonPicture/Picture/as_logo.svg)|Made by **As Project**.|
-||Made by Seriru.|
+|null|Made by Seriru.|
 |![gaccho](https://Kasugaccho.github.io/DungeonPicture/Picture/gaccho_icon.svg)|Made by Gaccho.|

@@ -1,6 +1,6 @@
-# DTL (Dungeon Template Library) for Unity [![BSL-1.0](https://img.shields.io/badge/license-BSL--1.0-blue.svg)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
+# Dungeon Template Library for Unity [![BSL-1.0](https://img.shields.io/badge/license-BSL--1.0-blue.svg)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
 
-[![Logo-GIF](https://kasugaccho.github.io/DungeonPicture/Picture/Unity/unity.png)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
+[![Logo-GIF](https://github.com/Kasugaccho/DungeonPicture/blob/master/Picture/Unity/logo_unity_150.png)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
 ---
 

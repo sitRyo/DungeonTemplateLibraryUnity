@@ -14,43 +14,42 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor;
-
 
 namespace DTL.Base {
-
     /*#######################################################################################
-        [概要] 'Coordinate2Dimensional' は2次元の座標を表すクラス。
-        [Summary] 'Coordinate2Dimensional' represents 2D coordinates.
+        [概要] 'Coordinate3Dimensional' は3次元の座標を表すクラス。
+        [Summary] 'Coordinate3Dimensional' represents 3D coordinates.
     #######################################################################################*/
-    public class Coordinate2Dimensional<T> : IEquatable<Coordinate2Dimensional<T>> where T : struct {
+    public class Coordinate3Dimensional<T> : IEquatable<Coordinate3Dimensional<T>>
+        where T : IEquatable<T> { 
         private T x { get; set; }
         private T y { get; set; }
+        private T z { get; set; }
 
-        public Coordinate2Dimensional(T x, T y) {
+        public Coordinate3Dimensional(T x, T y, T z) {
             this.x = x;
             this.y = y;
+            this.z = z;
         }
 
-        public bool Equals(Coordinate2Dimensional<T> others) {
-            if (others == null || ! this.GetType().Equals(others.GetType())) {
+        public bool Equals(Coordinate3Dimensional<T> others) {
+            if (others == null || this.GetType().Equals(others.GetType())) {
                 return false;
             }
 
-            return (EqualityComparer<T>.Default.Equals(x, others.x) && EqualityComparer<T>.Default.Equals(y, others.y));
+            return x.Equals(others.x) && y.Equals(others.y) && z.Equals(others.z);
         }
 
         public override bool Equals(object obj) {
             return Equals(obj);
         }
 
-        public static bool operator ==(Coordinate2Dimensional<T> lhs, Coordinate2Dimensional<T> rhs) {
+        public static bool operator ==(Coordinate3Dimensional<T> lhs, Coordinate3Dimensional<T> rhs) {
             return lhs != null && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(Coordinate2Dimensional<T> lhs, Coordinate2Dimensional<T> rhs) {
-            return lhs == null || !lhs.Equals(rhs);
+        public static bool operator !=(Coordinate3Dimensional<T> lhs, Coordinate3Dimensional<T> rhs) {
+            return lhs != null && !lhs.Equals(rhs);
         }
     }
 }

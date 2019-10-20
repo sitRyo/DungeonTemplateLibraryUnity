@@ -13,25 +13,25 @@
 #######################################################################################*/
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using DTL.Random;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-using IndexSize = System.UInt64;
-using Random = System.Random;
+
 
 /* size_t = uint とする。uint => System.UInt32 */
 
 namespace DTL.Shape{
 
-/*#######################################################################################
-	[概要] "dtl名前空間"とは"DungeonTemplateLibrary"の全ての機能が含まれる名前空間である。
-	[Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
-#######################################################################################*/
+    /*#######################################################################################
+        [概要] "dtl名前空間"とは"DungeonTemplateLibrary"の全ての機能が含まれる名前空間である。
+        [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
+    #######################################################################################*/
 
     public class SimpleRogueLike {
+
+        private DTLRandom rand = new DTLRandom();
+
         // 仮完成を最優先しているのでxorshiftによる乱数生成は後で書く予定
-        private System.Random rand = new System.Random();
+//        private System.Random rand = new System.Random();
 
         private const int RL_COUNT_X = 0;
         private const int RL_COUNT_Y = 1;
@@ -129,7 +129,7 @@ namespace DTL.Shape{
                 dungeonDivision[i, count] =
                     dungeonDivision[divisionAfter, count + 2]
                     + (dungeonDivision[divisionAfter, count] - dungeonDivision[divisionAfter, count + 2]) / 3
-                    + (uint)rand.Next(1, (int)(dungeonDivision[divisionAfter, count] - dungeonDivision[divisionAfter, count + 2]) / 3);
+                    + (uint)rand.Next(1, (dungeonDivision[divisionAfter, count] - dungeonDivision[divisionAfter, count + 2]) / 3);
 
                 dungeonDivision[i, count + 2] = dungeonDivision[divisionAfter, count + 2]; // 0, 軸の左端の座標
                 dungeonDivision[divisionAfter, count + 2] = dungeonDivision[i, count]; // divisionAfter軸の左端
@@ -172,8 +172,8 @@ namespace DTL.Shape{
                 }
 
 
-                uint l = dungeonDivision[i, 0] - dungeonRoom[i, 0] - 5 == 0 ? 2 : (uint)rand.Next(1, (int)(dungeonDivision[i, 0] - dungeonRoom[i, 0]) - 5) + 2;
-                uint n = dungeonDivision[i, 1] - dungeonRoom[i, 1] - 5 == 0 ? 2 : (uint)rand.Next(1, (int)(dungeonDivision[i, 1] - dungeonRoom[i, 1]) - 5) + 2;
+                uint l = dungeonDivision[i, 0] - dungeonRoom[i, 0] - 5 == 0 ? 2 : (uint)rand.Next(1, (dungeonDivision[i, 0] - dungeonRoom[i, 0]) - 5) + 2;
+                uint n = dungeonDivision[i, 1] - dungeonRoom[i, 1] - 5 == 0 ? 2 : (uint)rand.Next(1, (dungeonDivision[i, 1] - dungeonRoom[i, 1]) - 5) + 2;
 
                 dungeonRoom[i, 0] += l;
                 dungeonRoom[i, 2] += l;
@@ -187,10 +187,8 @@ namespace DTL.Shape{
                 roomAfter = dungeonRoad[roomBefore, 0];
                 switch (dungeonRoad[roomBefore, 1]) {
                     case RL_COUNT_X:
-                        dungeonRoad[roomBefore, 2] =
-                            (uint)rand.Next((int)(dungeonRoom[roomBefore, 1] - dungeonRoom[roomBefore, 3]) - 1);
-                        dungeonRoad[roomBefore, 3] =
-                            (uint)rand.Next((int)(dungeonRoom[roomAfter, 1] - dungeonRoom[roomAfter, 3]) - 1);
+                        dungeonRoad[roomBefore, 2] = rand.Next(dungeonRoom[roomBefore, 1] - dungeonRoom[roomBefore, 3] - 1);
+                        dungeonRoad[roomBefore, 3] = rand.Next(dungeonRoom[roomAfter, 1] - dungeonRoom[roomAfter, 3] - 1);
 
                         // 前の通路
                         for (uint j = dungeonRoom[roomBefore, 0]; j < dungeonDivision[roomBefore, 0]; ++j)
@@ -206,10 +204,8 @@ namespace DTL.Shape{
                             matrix_[dungeonDivision[roomBefore, 0], j] = roadValue; // 通路にマップチップを線画
                         break;
                     case RL_COUNT_Y:
-                        dungeonRoad[roomBefore, 2] =
-                            (uint)rand.Next((int)(dungeonRoom[roomBefore, 0] - dungeonRoom[roomBefore, 2]) - 1);
-                        dungeonRoad[roomBefore, 3] =
-                            (uint)rand.Next((int)(dungeonRoom[roomAfter, 0] - dungeonRoom[roomAfter, 2]) - 1);
+                        dungeonRoad[roomBefore, 2] = rand.Next(dungeonRoom[roomBefore, 0] - dungeonRoom[roomBefore, 2] - 1);
+                        dungeonRoad[roomBefore, 3] = rand.Next(dungeonRoom[roomAfter, 0] - dungeonRoom[roomAfter, 2] - 1);
 
                         // 前の通路
                         for (uint j = dungeonRoom[roomBefore, 1]; j < dungeonDivision[roomBefore, 1]; ++j)
@@ -248,11 +244,13 @@ namespace DTL.Shape{
         /* Constructors */
         public SimpleRogueLike() {} // = default();
 
+
+
         public SimpleRogueLike(int roomValue, int roadValue, uint divisionMin,
             uint divisionRandMax, uint roomMinX, uint roomRandMaxX, uint roomMinY, uint roomRandMaxY) {
             this.roomValue = roomValue;
             this.roadValue = roadValue;
-            this.divisionRandMax = divisionRandMax;
+            this.divisionMin = divisionMin;
             this.divisionRandMax = divisionRandMax;
             this.roomMinX = roomMinX;
             this.roomRandMaxX = roomRandMaxX;

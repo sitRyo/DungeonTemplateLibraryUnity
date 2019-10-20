@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DTL.Shape;
 
-public class GenerateDungeon : MonoBehaviour {
+public class GenerateDungeon : MonoBehaviour { 
+
     private SimpleRogueLike simpleRougeLike = new SimpleRogueLike(1, 2, 3, 4, 5, 2, 5, 2);
 
     void Start() {

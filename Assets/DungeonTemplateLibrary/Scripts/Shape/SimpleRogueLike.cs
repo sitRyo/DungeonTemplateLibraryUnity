@@ -31,7 +31,7 @@ namespace DTL.Shape{
 
     public class SimpleRogueLike {
         // 仮完成を最優先しているのでxorshiftによる乱数生成は後で書く予定
-        private Random rand = new Random();
+        private System.Random rand = new System.Random();
 
         private const int RL_COUNT_X = 0;
         private const int RL_COUNT_Y = 1;
@@ -76,14 +76,6 @@ namespace DTL.Shape{
             dungeonRoad[0, 1] = uint.MaxValue;
 
             CreateDivision(dungeonRoad, dungeonDivision, mapDivCount);
-            Debug.Log(mapDivCount);
-            for (int i = 0; i < mapDivCount; ++i) {
-                string s = "";
-                for (int j = 0; j < 4; ++j) {
-                    s += dungeonRoad[i, j].ToString() + " ";
-                }
-                Debug.Log(s);
-            }
             CreateRoom(dungeonRoom, dungeonDivision, mapDivCount);
             AssignRoom(dungeonRoom, matrix_, mapDivCount);
             CreateRoad(dungeonRoad, dungeonRoom, dungeonDivision, matrix_, mapDivCount);
@@ -136,7 +128,7 @@ namespace DTL.Shape{
 
                 dungeonDivision[i, count] =
                     dungeonDivision[divisionAfter, count + 2]
-                    + ((dungeonDivision[divisionAfter, count] - dungeonDivision[divisionAfter, count + 2]) / 3)
+                    + (dungeonDivision[divisionAfter, count] - dungeonDivision[divisionAfter, count + 2]) / 3
                     + (uint)rand.Next(1, (int)(dungeonDivision[divisionAfter, count] - dungeonDivision[divisionAfter, count + 2]) / 3);
 
                 dungeonDivision[i, count + 2] = dungeonDivision[divisionAfter, count + 2]; // 0, 軸の左端の座標
@@ -180,10 +172,8 @@ namespace DTL.Shape{
                 }
 
 
-                uint l = dungeonDivision[i, 0] - dungeonRoom[i, 0] - 5 == 0 ? 2 : ((uint)rand.Next(1, (int)(dungeonDivision[i, 0] - dungeonRoom[i, 0])) + 2);
-                uint n = dungeonDivision[i, 1] - dungeonRoom[i, 1] - 5 == 0 ? 2 : ((uint)rand.Next(1, (int)(dungeonDivision[i, 1] - dungeonRoom[i, 1])) + 2);
-
-                Debug.Log("ln " +l + " " + n);
+                uint l = dungeonDivision[i, 0] - dungeonRoom[i, 0] - 5 == 0 ? 2 : (uint)rand.Next(1, (int)(dungeonDivision[i, 0] - dungeonRoom[i, 0]) - 5) + 2;
+                uint n = dungeonDivision[i, 1] - dungeonRoom[i, 1] - 5 == 0 ? 2 : (uint)rand.Next(1, (int)(dungeonDivision[i, 1] - dungeonRoom[i, 1]) - 5) + 2;
 
                 dungeonRoom[i, 0] += l;
                 dungeonRoom[i, 2] += l;
@@ -192,8 +182,7 @@ namespace DTL.Shape{
             }
         }
 
-        private void CreateRoad(uint[,] dungeonRoad, uint[,] dungeonRoom, uint[,] dungeonDivision, int[,] matrix_,
-            uint mapDivCount) {
+        private void CreateRoad(uint[,] dungeonRoad, uint[,] dungeonRoom, uint[,] dungeonDivision, int[,] matrix_, uint mapDivCount) {
             for (uint roomBefore = 0, roomAfter = 0; roomBefore < mapDivCount; ++roomBefore) {
                 roomAfter = dungeonRoad[roomBefore, 0];
                 switch (dungeonRoad[roomBefore, 1]) {
@@ -213,7 +202,7 @@ namespace DTL.Shape{
                         // 通路をつなぐ
                         for (uint j = dungeonRoad[roomBefore, 2] + dungeonRoom[roomBefore, 3]; j <= dungeonRoad[roomBefore, 3] + dungeonRoom[roomAfter, 3]; ++j)
                             matrix_[dungeonDivision[roomBefore, 0], j] = roadValue; // 通路にマップチップを線画
-                        for (uint j = dungeonRoad[roomBefore, 3] + dungeonDivision[roomAfter, 3]; j <= dungeonRoad[roomBefore, 2] + dungeonRoom[roomBefore, 3]; ++j)
+                        for (uint j = dungeonRoad[roomBefore, 3] + dungeonRoom[roomAfter, 3]; j <= dungeonRoad[roomBefore, 2] + dungeonRoom[roomBefore, 3]; ++j)
                             matrix_[dungeonDivision[roomBefore, 0], j] = roadValue; // 通路にマップチップを線画
                         break;
                     case RL_COUNT_Y:
@@ -232,7 +221,7 @@ namespace DTL.Shape{
                         // 通路をつなぐ
                         for (uint j = dungeonRoad[roomBefore, 2] + dungeonRoom[roomBefore, 2]; j <= dungeonRoad[roomBefore, 3] + dungeonRoom[roomAfter, 2]; ++j)
                             matrix_[j, dungeonDivision[roomBefore, 1]] = roadValue; // 通路にマップチップを線画
-                        for (uint j = dungeonRoad[roomBefore, 3] + dungeonDivision[roomAfter, 2]; j <= dungeonRoad[roomBefore, 2] + dungeonRoom[roomBefore, 2]; ++j)
+                        for (uint j = dungeonRoad[roomBefore, 3] + dungeonRoom[roomAfter, 2]; j <= dungeonRoad[roomBefore, 2] + dungeonRoom[roomBefore, 2]; ++j)
                             matrix_[j, dungeonDivision[roomBefore, 1]] = roadValue; // 通路にマップチップを線画
                         break;
 

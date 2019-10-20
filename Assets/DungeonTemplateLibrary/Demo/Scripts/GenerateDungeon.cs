@@ -8,8 +8,8 @@ public class GenerateDungeon : MonoBehaviour {
     private SimpleRogueLike simpleRougeLike = new SimpleRogueLike(1, 2, 3, 4, 5, 2, 5, 2);
 
     void Start() {
-        int width = 36;
-        int height = 48;
+        int width = 48;
+        int height = 36;
         int[,] matrix = new int[height, width];
         simpleRougeLike.Draw(matrix);
         string s = "\n";

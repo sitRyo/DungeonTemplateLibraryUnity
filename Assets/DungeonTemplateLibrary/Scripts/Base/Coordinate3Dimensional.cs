@@ -20,19 +20,18 @@ namespace DTL.Base {
         [概要] 'Coordinate3Dimensional' は3次元の座標を表すクラス。
         [Summary] 'Coordinate3Dimensional' represents 3D coordinates.
     #######################################################################################*/
-    public class Coordinate3Dimensional<T> : IEquatable<Coordinate3Dimensional<T>>
-        where T : IEquatable<T> { 
-        private T x { get; set; }
-        private T y { get; set; }
-        private T z { get; set; }
+    public class Coordinate3Dimensional : IEquatable<Coordinate3Dimensional> { 
+        private int x { get; set; }
+        private int y { get; set; }
+        private int z { get; set; }
 
-        public Coordinate3Dimensional(T x, T y, T z) {
+        public Coordinate3Dimensional(int x, int y, int z) {
             this.x = x;
             this.y = y;
             this.z = z;
         }
 
-        public bool Equals(Coordinate3Dimensional<T> others) {
+        public bool Equals(Coordinate3Dimensional others) {
             if (others == null || this.GetType().Equals(others.GetType())) {
                 return false;
             }
@@ -44,11 +43,11 @@ namespace DTL.Base {
             return Equals(obj);
         }
 
-        public static bool operator ==(Coordinate3Dimensional<T> lhs, Coordinate3Dimensional<T> rhs) {
+        public static bool operator ==(Coordinate3Dimensional lhs, Coordinate3Dimensional rhs) {
             return lhs != null && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(Coordinate3Dimensional<T> lhs, Coordinate3Dimensional<T> rhs) {
+        public static bool operator !=(Coordinate3Dimensional lhs, Coordinate3Dimensional rhs) {
             return lhs != null && !lhs.Equals(rhs);
         }
     }

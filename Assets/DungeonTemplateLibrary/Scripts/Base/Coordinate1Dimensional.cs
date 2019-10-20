@@ -20,10 +20,10 @@ namespace DTL.Base {
         [概要] 'Coordinate1Dimensional' は1次元の座標を表すクラス。
         [Summary] 'Coordinate1Dimensional' represents 1D coordinates.
     #######################################################################################*/
-    public class Coordinate1Dimensional<T> {
-        private T x { get; set; }
+    public class Coordinate1Dimensional {
+        private int x { get; set; }
 
-        Coordinate1Dimensional(T x) {
+        Coordinate1Dimensional(int x) {
             this.x = x;
         }
     }

@@ -24,18 +24,16 @@ namespace DTL.Base {
         [概要] 'Coordinate2Dimensional' は2次元の座標を表すクラス。
         [Summary] 'Coordinate2Dimensional' represents 2D coordinates.
     #######################################################################################*/
-    public class Coordinate2Dimensional<T> :
-        IEquatable<Coordinate2Dimensional<T>>
-        where T : IEquatable<T> {
-        private T x { get; set; }
-        private T y { get; set; }
+    public class Coordinate2Dimensional : IEquatable<Coordinate2Dimensional> {
+        private int x { get; set; }
+        private int y { get; set; }
 
-        public Coordinate2Dimensional(T x, T y) {
+        public Coordinate2Dimensional(int x, int y) {
             this.x = x;
             this.y = y;
         }
 
-        public bool Equals(Coordinate2Dimensional<T> others) {
+        public bool Equals(Coordinate2Dimensional others) {
             if (others == null || ! this.GetType().Equals(others.GetType())) {
                 return false;
             }
@@ -47,11 +45,11 @@ namespace DTL.Base {
             return Equals(obj);
         }
 
-        public static bool operator ==(Coordinate2Dimensional<T> lhs, Coordinate2Dimensional<T> rhs) {
+        public static bool operator ==(Coordinate2Dimensional lhs, Coordinate2Dimensional rhs) {
             return lhs != null && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(Coordinate2Dimensional<T> lhs, Coordinate2Dimensional<T> rhs) {
+        public static bool operator !=(Coordinate2Dimensional lhs, Coordinate2Dimensional rhs) {
             return lhs != null && !lhs.Equals(rhs);
         }
     }

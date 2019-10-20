@@ -17,39 +17,32 @@ using System.Collections.Generic;
 
 namespace DTL.Base {
 
-    public class Coordinate2DimensionalAndLength2Dimensional<T> : 
-        IEquatable<Coordinate2DimensionalAndLength2Dimensional<T>>,
-        IComparable<Coordinate2DimensionalAndLength2Dimensional<T>> 
-        where T : IComparable<T>, IEquatable<T> {
+    public class Coordinate2DimensionalAndLength2Dimensional : 
+        IEquatable<Coordinate2DimensionalAndLength2Dimensional>,
+        IComparable<Coordinate2DimensionalAndLength2Dimensional> {
 
-        // for generics arithmetic operations.
-        // NOTE! throws new NotSupportedException() when T is not support generic arithmetic operations(Now, only supports primitive type (like int, double...))
-        public static GenericOperations<T> genericOperations = new GenericOperations<T>();
+        private int x { get; set; }
+        private int y { get; set; }
+        private int w { get; set; }
+        private int h { get; set; }
 
-        private T x { get; set; }
-        private T y { get; set; }
-        private T w { get; set; }
-        private T h { get; set; }
+        public Coordinate2DimensionalAndLength2Dimensional() { } 
 
-        public Coordinate2DimensionalAndLength2Dimensional() {
-            //            genericOperations = new GenericOperations<T>(); // throws new NotSupportedException();
-        } // = default()
-
-        public Coordinate2DimensionalAndLength2Dimensional(T x, T y) {
+        public Coordinate2DimensionalAndLength2Dimensional(int x, int y) {
             this.x = x;
             this.y = y;
         }
 
-        public Coordinate2DimensionalAndLength2Dimensional(T x, T y, T w) : this(x, y) {
+        public Coordinate2DimensionalAndLength2Dimensional(int x, int y, int w) : this(x, y) {
             this.w = w;
         }
 
-        public Coordinate2DimensionalAndLength2Dimensional(T x, T y, T w, T h) : this(x, y, w) {
+        public Coordinate2DimensionalAndLength2Dimensional(int x, int y, int w, int h) : this(x, y, w) {
             this.h = h;
         }
 
         // Check 'Value Equation'
-        public bool Equals(Coordinate2DimensionalAndLength2Dimensional<T> others) {
+        public bool Equals(Coordinate2DimensionalAndLength2Dimensional others) {
             if (others == null || !this.GetType().Equals(others.GetType())) {
                 return false;
             }
@@ -61,45 +54,38 @@ namespace DTL.Base {
             return this.Equals(obj);
         }
 
-        public int CompareTo(Coordinate2DimensionalAndLength2Dimensional<T> other) {
-            return genericOperations.CastToInt(
-                genericOperations.Subtract(
-                genericOperations.Multiply(h, w),
-                genericOperations.Multiply(other.h, other.w)));
+        public int CompareTo(Coordinate2DimensionalAndLength2Dimensional other) {
+            return w * h - other.w * other.h;
         }
 
-        public static bool operator ==(Coordinate2DimensionalAndLength2Dimensional<T> rhs,
-            Coordinate2DimensionalAndLength2Dimensional<T> lhs) {
+        public static bool operator ==(Coordinate2DimensionalAndLength2Dimensional lhs,
+            Coordinate2DimensionalAndLength2Dimensional rhs) {
             return lhs != null && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(Coordinate2DimensionalAndLength2Dimensional<T> rhs,
-            Coordinate2DimensionalAndLength2Dimensional<T> lhs) {
-            return lhs != null && lhs.Equals(rhs);
+        public static bool operator !=(Coordinate2DimensionalAndLength2Dimensional lhs,
+            Coordinate2DimensionalAndLength2Dimensional rhs) {
+            return lhs != null && !lhs.Equals(rhs);
         }
 
-        public static bool operator >(Coordinate2DimensionalAndLength2Dimensional<T> rhs,
-            Coordinate2DimensionalAndLength2Dimensional<T> lhs) {
-            return lhs != null && rhs != null && genericOperations.Multiply(lhs.w, lhs.h)
-                       .CompareTo(genericOperations.Multiply(rhs.w, rhs.h)) > 0;
+        public static bool operator >(Coordinate2DimensionalAndLength2Dimensional lhs,
+            Coordinate2DimensionalAndLength2Dimensional rhs) {
+            return lhs != null && rhs != null && lhs.CompareTo(rhs) > 0;
         }
 
-        public static bool operator <(Coordinate2DimensionalAndLength2Dimensional<T> rhs,
-            Coordinate2DimensionalAndLength2Dimensional<T> lhs) {
-            return lhs != null && rhs != null && genericOperations.Multiply(lhs.w, lhs.h)
-                       .CompareTo(genericOperations.Multiply(rhs.w, rhs.h)) < 0;
+        public static bool operator <(Coordinate2DimensionalAndLength2Dimensional lhs,
+            Coordinate2DimensionalAndLength2Dimensional rhs) {
+            return lhs != null && rhs != null && lhs.CompareTo(rhs) < 0;
         }
 
-        public static bool operator >=(Coordinate2DimensionalAndLength2Dimensional<T> rhs,
-            Coordinate2DimensionalAndLength2Dimensional<T> lhs) {
-            return lhs != null && rhs != null && genericOperations.Multiply(lhs.w, lhs.h)
-                       .CompareTo(genericOperations.Multiply(rhs.w, rhs.h)) >= 0;
+        public static bool operator >=(Coordinate2DimensionalAndLength2Dimensional lhs,
+            Coordinate2DimensionalAndLength2Dimensional rhs) {
+            return lhs != null && rhs != null && lhs.CompareTo(rhs) >= 0;
         }
 
-        public static bool operator <=(Coordinate2DimensionalAndLength2Dimensional<T> rhs,
-            Coordinate2DimensionalAndLength2Dimensional<T> lhs) {
-            return lhs != null && rhs != null && genericOperations.Multiply(lhs.w, lhs.h)
-                       .CompareTo(genericOperations.Multiply(rhs.w, rhs.h)) <= 0;
+        public static bool operator <=(Coordinate2DimensionalAndLength2Dimensional lhs,
+            Coordinate2DimensionalAndLength2Dimensional rhs) {
+            return lhs != null && rhs != null && lhs.CompareTo(rhs) <= 0;
         }
 
     }

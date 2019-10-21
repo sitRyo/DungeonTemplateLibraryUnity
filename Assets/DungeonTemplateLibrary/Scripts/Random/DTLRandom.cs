@@ -85,8 +85,7 @@ namespace DTL.Random {
         // Randomのシードを指定することができる。
         // デバッグの時に同じ状況を再現できるので便利かもしれない。
         public DTLRandom(int? seed_ = null) {
-            if (seed_ == null) { rand = new System.Random(); } else { rand = new System.Random(); }
+            rand = seed_ == null ? new System.Random() : new System.Random((int)seed_);
         } // default;
     }
-
 }

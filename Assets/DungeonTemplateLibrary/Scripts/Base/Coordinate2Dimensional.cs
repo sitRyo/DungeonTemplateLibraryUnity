@@ -25,8 +25,8 @@ namespace DTL.Base {
         [Summary] 'Coordinate2Dimensional' represents 2D coordinates.
     #######################################################################################*/
     public class Coordinate2Dimensional : IEquatable<Coordinate2Dimensional> {
-        private int x { get; set; }
-        private int y { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
 
         public Coordinate2Dimensional(int x, int y) {
             this.x = x;

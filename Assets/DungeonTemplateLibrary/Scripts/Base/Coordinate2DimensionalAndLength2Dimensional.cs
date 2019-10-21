@@ -21,10 +21,10 @@ namespace DTL.Base {
         IEquatable<Coordinate2DimensionalAndLength2Dimensional>,
         IComparable<Coordinate2DimensionalAndLength2Dimensional> {
 
-        private int x { get; set; }
-        private int y { get; set; }
-        private int w { get; set; }
-        private int h { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public int w { get; set; }
+        public int h { get; set; }
 
         public Coordinate2DimensionalAndLength2Dimensional() { } 
 

@@ -21,9 +21,9 @@ namespace DTL.Base {
         [Summary] 'Coordinate3Dimensional' represents 3D coordinates.
     #######################################################################################*/
     public class Coordinate3Dimensional : IEquatable<Coordinate3Dimensional> { 
-        private int x { get; set; }
-        private int y { get; set; }
-        private int z { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public int z { get; set; }
 
         public Coordinate3Dimensional(int x, int y, int z) {
             this.x = x;

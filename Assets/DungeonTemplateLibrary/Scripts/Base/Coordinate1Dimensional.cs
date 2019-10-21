@@ -21,7 +21,7 @@ namespace DTL.Base {
         [Summary] 'Coordinate1Dimensional' represents 1D coordinates.
     #######################################################################################*/
     public class Coordinate1Dimensional {
-        private int x { get; set; }
+        public int x { get; set; }
 
         Coordinate1Dimensional(int x) {
             this.x = x;

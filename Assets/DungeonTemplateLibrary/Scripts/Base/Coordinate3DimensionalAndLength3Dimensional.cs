@@ -21,12 +21,12 @@ namespace DTL.Base {
         IEquatable<Coordinate3DimensionalAndLength3Dimensional>,
         IComparable<Coordinate3DimensionalAndLength3Dimensional> {
 
-        private int x { get; set; }
-        private int y { get; set; }
-        private int z { get; set; }
-        private int w { get; set; }
-        private int h { get; set; }
-        private int d { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public int z { get; set; }
+        public int w { get; set; }
+        public int h { get; set; }
+        public int d { get; set; }
 
         public Coordinate3DimensionalAndLength3Dimensional() { } // default
 

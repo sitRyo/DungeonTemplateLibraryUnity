@@ -15,43 +15,24 @@
 using System;
 using DTL.Random;
 using UnityEngine;
+using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 
 /* size_t = uint とする。uint => System.UInt32 */
 
-namespace DTL.Shape{
+namespace DTL.Shape {
 
     /*#######################################################################################
         [概要] "dtl名前空間"とは"DungeonTemplateLibrary"の全ての機能が含まれる名前空間である。
         [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
     #######################################################################################*/
 
-    public class SimpleRogueLike {
+    public class SimpleRogueLike : DTL.Range.RectBaseSimpleRogueLike {
 
         private DTLRandom rand = new DTLRandom();
 
-        // 仮完成を最優先しているのでxorshiftによる乱数生成は後で書く予定
-//        private System.Random rand = new System.Random();
-
         private const int RL_COUNT_X = 0;
         private const int RL_COUNT_Y = 1;
-
-        private uint startX = 0;
-        private uint startY = 0;
-        private uint width = 0;
-        private uint height = 0;
-
-        private int roomValue;
-        private int roadValue;
-
-        private uint divisionMin = 3;
-        private uint divisionRandMax = 4;
-        private uint roomMinX = 5;
-        private uint roomRandMaxX = 2;
-        private uint roomMinY = 5;
-        private uint roomRandMaxY = 2;
-
-        
 
         /* 基本処理 */
 
@@ -242,21 +223,23 @@ namespace DTL.Shape{
         }
 
         /* Constructors */
-        public SimpleRogueLike() {} // = default();
+        public SimpleRogueLike() { } // = default();
 
+        public SimpleRogueLike(int roomValue) : base(roomValue) { }
 
+        public SimpleRogueLike(int roomValue, int roadValue) : base(roomValue, roadValue) { }
 
         public SimpleRogueLike(int roomValue, int roadValue, uint divisionMin,
-            uint divisionRandMax, uint roomMinX, uint roomRandMaxX, uint roomMinY, uint roomRandMaxY) {
-            this.roomValue = roomValue;
-            this.roadValue = roadValue;
-            this.divisionMin = divisionMin;
-            this.divisionRandMax = divisionRandMax;
-            this.roomMinX = roomMinX;
-            this.roomRandMaxX = roomRandMaxX;
-            this.roomMinY = roomMinY;
-            this.roomRandMaxY = roomRandMaxY;
-        }
+            uint divisionRandMax, uint roomMinX, uint roomRandMaxX, uint roomMinY, uint roomRandMaxY) : base(roomValue, roadValue, divisionMin, divisionRandMax, roomMinX, roomRandMaxX, roomMinY, roomRandMaxY) { }
 
+        public SimpleRogueLike(MatrixRange matrixRange) : base(matrixRange) { }
+
+        public SimpleRogueLike(MatrixRange matrixRange, int roomValue) : base(matrixRange, roomValue) { }
+
+        public SimpleRogueLike(MatrixRange matrixRange, int roomValue, int roadValue) : base(matrixRange, roomValue, roadValue) { }
+
+        public SimpleRogueLike(MatrixRange matrixRange, int roomValue, int roadValue, uint divisionMin,
+            uint divisionRandMax, uint roomMinX, uint roomRandMaxX, uint roomMinY, uint roomRandMaxY)
+            : base(matrixRange, roomValue, roadValue, divisionMin, divisionRandMax, roomMinX, roomRandMaxX, roomMinY, roomRandMaxY) { }
     }
 }

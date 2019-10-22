@@ -27,7 +27,7 @@ namespace DTL.Shape {
         [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
     #######################################################################################*/
 
-    public class SimpleRogueLike : DTL.Range.RectBaseSimpleRogueLike {
+    public class SimpleRogueLike : DTL.Range.RectBaseSimpleRogueLike<SimpleRogueLike> {
 
         private DTLRandom rand = new DTLRandom();
 
@@ -48,8 +48,8 @@ namespace DTL.Shape {
             // マップの道 [部屋ID][X終点 , Y終点 , X始点 , Y始点]
             var dungeonRoad = new uint[mapDivCount, 4];
 
-            dungeonDivision[0, 0] = endY_ - 1; // マップの区分け初期サイズX終点 (マップの大きさX軸)
-            dungeonDivision[0, 1] = endX_ - 1; // マップの区分け初期サイズY終点 (マップの大きさY軸)
+            dungeonDivision[0, 0] = endY_ - 1; // マップの区分け初期サイズX終点 (マップの大きさY軸)
+            dungeonDivision[0, 1] = endX_ - 1; // マップの区分け初期サイズY終点 (マップの大きさX軸)
             dungeonDivision[0, 2] = startX + 1; // マップの区分け初期サイズX始点 (マップの大きさX軸)
             dungeonDivision[0, 3] = startY + 1; // マップの区分け初期サイズY始点 (マップの大きさY軸)
 
@@ -209,17 +209,17 @@ namespace DTL.Shape {
         private void AssignRoom(uint[,] dungeonRoom, int[,] matrix_, uint mapDivCount) {
             // 部屋を生成する処理(始点 -> 終点)
             for (uint i = 0; i < mapDivCount; ++i) 
-                for (uint j = dungeonRoom[i, 2]; j < dungeonRoom[i, 0]; ++j) 
-                    for (uint k = dungeonRoom[i, 3]; k < dungeonRoom[i, 1]; ++k) 
-                        matrix_[j, k] = roomValue;
+                for (uint j = dungeonRoom[i, 2]; j < dungeonRoom[i, 0]; ++j)
+                for (uint k = dungeonRoom[i, 3]; k < dungeonRoom[i, 1]; ++k)
+                    matrix_[j, k] = roomValue;
         }
 
         // 生成呼び出し (drawing function call)
         public bool Draw(int[,] matrix_) {
             return DrawNormal(
                 matrix_,
-                (width == 0 || startX + width >= ((matrix_.Length == 0) ? 0 : matrix_.GetLength(0))) ? (uint)(matrix_.Length / matrix_.GetLength(0)) : startX + width,
-                (height == 0 || startY + height >= matrix_.Length) ? (uint)((matrix_.Length == 0) ? 0 : matrix_.GetLength(0)) : startX + width);
+                (width == 0 || startX + width >= (matrix_.Length == 0 ? 0 : (uint)(matrix_.Length / matrix_.GetLength(0)))) ? (uint)(matrix_.Length / matrix_.GetLength(0)) : startX + width,
+                (height == 0 || startY + height >= matrix_.GetLength(0)) ? (uint)(matrix_.Length == 0 ? 0 : matrix_.GetLength(0)) : startY + height);
         }
 
         /* Constructors */

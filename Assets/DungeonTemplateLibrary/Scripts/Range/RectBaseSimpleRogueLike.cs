@@ -22,11 +22,11 @@ namespace DTL.Range {
         [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
     #######################################################################################*/
 
-    public class RectBaseSimpleRogueLike {
-        public uint startX { get; set; } = 0;
-        public uint startY { get; set; } = 0;
-        public uint width { get; set; } = 0;
-        public uint height { get; set; } = 0;
+    public class RectBaseSimpleRogueLike<TDerived> where TDerived : RectBaseSimpleRogueLike<TDerived> {
+        public uint startX { get; set; }
+        public uint startY { get; set; }
+        public uint width { get; set; }
+        public uint height { get; set; }
 
         public int roomValue { get; set; }
         public int roadValue { get; set; }
@@ -39,45 +39,45 @@ namespace DTL.Range {
         public uint roomRandMaxY { get; private set; } = 2;
 
         // 消去 (clear) //
-        public RectBaseSimpleRogueLike ClearRoom() {
+        public TDerived ClearRoom() {
             roomValue = 0;
-            return this;
+            return (TDerived)this;
         }
 
-        public RectBaseSimpleRogueLike ClearWay() {
+        public TDerived ClearWay() {
             roadValue = 0;
-            return this;
+            return (TDerived)this;
         }
 
-        public RectBaseSimpleRogueLike ClearRoad() {
+        public TDerived ClearRoad() {
             roadValue = 0;
-            return this;
+            return (TDerived)this;
         }
 
-        public RectBaseSimpleRogueLike ClearValue() {
+        public TDerived ClearValue() {
             ClearRoom();
             ClearRoad();
-            return this;
+            return (TDerived)this;
         }
 
         // 代入 (setter returns own instance) //
 
-        public RectBaseSimpleRogueLike SetRoom(int roomValue) {
+        public TDerived SetRoom(int roomValue) {
             this.roomValue = roomValue;
-            return this;
+            return (TDerived)this;
         }
 
-        public RectBaseSimpleRogueLike SetWay(int roadValue) {
+        public TDerived SetWay(int roadValue) {
             this.roadValue = roadValue;
-            return this;
+            return (TDerived)this;
         }
 
-        public RectBaseSimpleRogueLike SetRoad(int roadValue) {
+        public TDerived SetRoad(int roadValue) {
             this.roadValue = roadValue;
-            return this;
+            return (TDerived)this;
         }
 
-        public RectBaseSimpleRogueLike SetRugueLike(uint divisionMin, uint divisionRandMax, uint roomMinX,
+        public TDerived SetRogueLike(uint divisionMin, uint divisionRandMax, uint roomMinX,
             uint roomRandMaxX, uint roomMinY, uint roomRandMaxY) {
             this.divisionMin = divisionMin;
             this.divisionRandMax = divisionRandMax;
@@ -85,7 +85,7 @@ namespace DTL.Range {
             this.roomRandMaxX = roomRandMaxX;
             this.roomMinY = roomMinY;
             this.roomRandMaxY = roomRandMaxY;
-            return this;
+            return (TDerived)this;
         }
 
         /* Constructors */

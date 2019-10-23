@@ -16,6 +16,10 @@ using System;
 using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace DTL.Base {
+    /*#######################################################################################
+        [概要] "dtl名前空間"とは"DungeonTemplateLibrary"の全ての機能が含まれる名前空間である。
+        [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
+    #######################################################################################*/
     public class RogueLikeList {
         public int outsideWallId { get; set; }
         public int insideWallId { get; set; } 
@@ -57,6 +61,6 @@ namespace DTL.Base {
             this.wayId = wayId;
         }
 
-        public RogueLikeList DefaultRogueLikeList() =>　new RogueLikeList(0, 1, 2, 3, 4);
+        public RogueLikeList DefaultRogueLikeList() => new RogueLikeList(0, 1, 2, 3, 4);
     }
 }

@@ -16,6 +16,11 @@ using System;
 using UnityEngine;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
+/*
+ * Range機能(配列の特定の範囲を描画する機能)は未実装.
+ * 将来的に実装することを見据えて名前空間は本家DTLに倣うことにする.
+ */
+
 namespace DTL.Range {
     /*#######################################################################################
         [概要] "dtl名前空間"とは"DungeonTemplateLibrary"の全ての機能が含まれる名前空間である。

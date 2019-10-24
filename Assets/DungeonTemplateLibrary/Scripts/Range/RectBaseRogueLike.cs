@@ -30,7 +30,7 @@ namespace DTL.Range {
         [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
     #######################################################################################*/
 
-    class RectBaseRogueLike<TDerived> where TDerived : RectBaseRogueLike<TDerived> {
+    public class RectBaseRogueLike<TDerived> : BasicRect<RectBaseRogueLike<TDerived>> where TDerived : RectBaseRogueLike<TDerived> {
         public RogueLikeList rogueLikeList { get; protected set; }
         public uint maxWay { get; protected set; } = 20;
         protected MatrixRange roomRange = new MatrixRange(3, 3, 3, 3);

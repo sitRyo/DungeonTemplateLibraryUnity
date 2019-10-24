@@ -104,6 +104,10 @@ namespace DTL.Range {
 
         public RectBaseRogueLike() { } // = default();
 
+        public RectBaseRogueLike(MatrixRange matrixRange) : base(matrixRange) { }
+
+        public RectBaseRogueLike(uint startX, uint startY, uint width, uint height) : base(startX, startY, width, height) { }
+
         public RectBaseRogueLike(RogueLikeList drawValue) {
             this.rogueLikeList = drawValue;
         }
@@ -141,6 +145,44 @@ namespace DTL.Range {
             this.wayRange = wayRange;
         }
 
+        public RectBaseRogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay) : base(matrixRange) {
+            this.rogueLikeList = drawValue;
+            this.maxWay = maxWay;
+        }
+
+        public RectBaseRogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange) : base(matrixRange) {
+            this.rogueLikeList = drawValue;
+            this.roomRange = roomRange;
+            this.maxWay = maxWay;
+        }
+
+        public RectBaseRogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange, MatrixRange wayRange) : base(matrixRange) {
+            this.rogueLikeList = drawValue;
+            this.roomRange = roomRange;
+            this.wayRange = wayRange;
+            this.maxWay = maxWay;
+        }
+
+        public RectBaseRogueLike(uint startX, uint startY, uint width, uint height, RogueLikeList drawValue,
+            uint maxWay) : base(startX, startY, width, height) {
+            this.rogueLikeList = drawValue;
+            this.maxWay = maxWay;
+        }
+
+        public RectBaseRogueLike(uint startX, uint startY, uint width, uint height, RogueLikeList drawValue,
+            uint maxWay, MatrixRange roomRange) : base(startX, startY, width, height) {
+            this.rogueLikeList = drawValue;
+            this.maxWay = maxWay;
+            this.roomRange = roomRange;
+        }
+
+        public RectBaseRogueLike(uint startX, uint startY, uint width, uint height, RogueLikeList drawValue,
+            uint maxWay, MatrixRange roomRange, MatrixRange wayRange) : base(startX, startY, width, height) {
+            this.rogueLikeList = drawValue;
+            this.maxWay = maxWay;
+            this.roomRange = roomRange;
+            this.wayRange = wayRange;
+        }
     }
 
 }

@@ -34,7 +34,7 @@ namespace DTL.Range {
             return (this.width == 0 || this.startX + this.width >= maxX) ? maxX : this.startX + this.width;
         }
 
-        protected uint calcEndY(uint maxY) {
+        protected uint CalcEndY(uint maxY) {
             return (this.height == 0 || this.startY + this.height >= maxY) ? maxY : this.startY + this.height;
         }
 

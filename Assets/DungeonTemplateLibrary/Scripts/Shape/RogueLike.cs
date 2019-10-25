@@ -17,6 +17,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DTL.Random;
 using DTL.Util;
+using DTL.Base;
+using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
+
 
 namespace DTL.Shape {
     /*#######################################################################################
@@ -72,7 +75,7 @@ namespace DTL.Shape {
             var isWay = new List<bool>();
 
             // 最初の部屋を生成
-            if (!MakeRoom(matrix, sizeX, sizeY, roomRect, branchPoint, isWay, (int)sizeX / 2, (int)sizeY / 2,
+            if (!MakeRoom(matrix, sizeX, sizeY, roomRect, branchPoint, isWay, (int) sizeX / 2, (int) sizeY / 2,
                 (Direction) rand.Next(directionCount))) return false;
 
             // 機能配置
@@ -161,7 +164,8 @@ namespace DTL.Shape {
             return true;
         }
 
-        private bool makeWay(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> branchPoint, List<bool> isWay,
+        private bool makeWay(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> branchPoint,
+            List<bool> isWay,
             int x_, int y_, Direction dir_) {
             RogueLikeOutputNumber way = new RogueLikeOutputNumber();
             way.x = x_;
@@ -313,6 +317,69 @@ namespace DTL.Shape {
             }
 
             return true;
+        }
+
+        /* Constructors */
+
+        public RogueLike() {
+        } // = default();
+
+        public RogueLike(MatrixRange matrixRange) : base(matrixRange) {
+        }
+
+        public RogueLike(uint startX, uint startY, uint width, uint height) : base(startX, startY, width, height) {
+        }
+
+        public RogueLike(RogueLikeList drawValue) : base(drawValue) {
+        }
+
+        public RogueLike(RogueLikeList drawValue, uint maxWay) : base(drawValue, maxWay) {
+        }
+
+        public RogueLike(RogueLikeList drawValue, uint maxWay, MatrixRange roomRange) : base(drawValue, maxWay,
+            roomRange) {
+        }
+
+        public RogueLike(RogueLikeList drawValue, uint maxWay, MatrixRange roomRange, MatrixRange wayRange) : base(
+            drawValue, maxWay, roomRange, wayRange) {
+        }
+
+        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId) : base(
+            outsideWallId, insideWallId, roomId, entranceId, wayId) {
+        }
+
+        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId,
+            MatrixRange roomRange) : base(outsideWallId, insideWallId, roomId, entranceId, wayId, roomRange) {
+        }
+
+        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId,
+            MatrixRange roomRange, MatrixRange wayRange) : base(outsideWallId, insideWallId, roomId, entranceId, wayId,
+            roomRange, wayRange) {
+        }
+
+        public RogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay) : base(matrixRange, drawValue,
+            maxWay) {
+        }
+
+        public RogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange) : base(
+            matrixRange, drawValue, maxWay, roomRange) {
+        }
+
+        public RogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange,
+            MatrixRange wayRange) : base(matrixRange, drawValue, maxWay, roomRange, wayRange) {
+        }
+
+        public RogueLike(uint startX, uint startY, uint width, uint height, RogueLikeList drawValue,
+            uint maxWay) : base(startX, startY, width, height, drawValue, maxWay) {
+        }
+
+        public RogueLike(uint startX, uint startY, uint width, uint height, RogueLikeList drawValue,
+            uint maxWay, MatrixRange roomRange) : base(startX, startY, width, height, drawValue, maxWay, roomRange) {
+        }
+
+        public RogueLike(uint startX, uint startY, uint width, uint height, RogueLikeList drawValue,
+            uint maxWay, MatrixRange roomRange, MatrixRange wayRange) : base(startX, startY, width, height, drawValue,
+            maxWay, roomRange, wayRange) {
         }
     }
 }

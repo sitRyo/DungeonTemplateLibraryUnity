@@ -12,12 +12,13 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
-using System;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DTL.Random;
 using DTL.Util;
 using DTL.Base;
+using DTL.Interfaces;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 
@@ -46,7 +47,7 @@ namespace DTL.Shape {
 
     /* The type of array to store dungeon data is int[,] */
 
-    public class RogueLike : DTL.Range.RectBaseRogueLike<RogueLike> {
+    public class RogueLike : DTL.Range.RectBaseRogueLike<RogueLike>, IDrawer<int> {
         private DTLRandom rand = new DTLRandom();
 
         enum Direction : uint {
@@ -58,6 +59,11 @@ namespace DTL.Shape {
         }
 
         private readonly uint directionCount = 4;
+
+        /* Implement Drawer */
+        public bool Draw(int[,] matrix) {
+            return startX >= MatrixUtil.GetX(matrix) || startY >= MatrixUtil.GetY(matrix) ? false : DrawNormal(matrix);
+        }
 
         /* 基本処理 */
         bool DrawNormal(int[,] matrix) {
@@ -80,13 +86,13 @@ namespace DTL.Shape {
 
             // 機能配置
             for (uint i = 1; i < maxWay; ++i) {
-                if (!createNext2(matrix, sizeX, sizeY, roomRect, branchPoint, isWay)) break;
+                if (!CreateNext2(matrix, sizeX, sizeY, roomRect, branchPoint, isWay)) break;
             }
 
             return true;
         }
 
-        private bool createNext2(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> roomRect,
+        private bool CreateNext2(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> roomRect,
             List<RogueLikeOutputNumber> branchPoint, List<bool> isWay) {
             /* 0xffff = 65536 までループを回す */
             for (int i = 0, r = 0; i < 65536; ++i) {
@@ -348,12 +354,17 @@ namespace DTL.Shape {
             outsideWallId, insideWallId, roomId, entranceId, wayId) {
         }
 
-        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId,
-            MatrixRange roomRange) : base(outsideWallId, insideWallId, roomId, entranceId, wayId, roomRange) {
+        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay) :
+            base(outsideWallId, insideWallId, roomId, entranceId, wayId, maxWay) {
         }
 
-        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId,
+        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay,
+            MatrixRange roomRange) : base(outsideWallId, insideWallId, roomId, entranceId, wayId, maxWay, roomRange) {
+        }
+
+        public RogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay,
             MatrixRange roomRange, MatrixRange wayRange) : base(outsideWallId, insideWallId, roomId, entranceId, wayId,
+            maxWay,
             roomRange, wayRange) {
         }
 

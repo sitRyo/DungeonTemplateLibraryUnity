@@ -15,7 +15,8 @@
 using System;
 using DTL.Base;
 using DTL.Shape;
-using UnityEngine;
+using DTL.Util;
+using DTL.Interfaces;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Range {
@@ -129,13 +130,21 @@ namespace DTL.Range {
             this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
         }
 
-        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, MatrixRange roomRange) {
+        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay) {
             this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
+            this.maxWay = maxWay;
+        }
+
+
+        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay, MatrixRange roomRange) {
+            this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
+            this.maxWay = maxWay;
             this.roomRange = roomRange;
         }
 
-        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, MatrixRange roomRange, MatrixRange wayRange) {
+        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay, MatrixRange roomRange, MatrixRange wayRange) {
             this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
+            this.maxWay = maxWay;
             this.roomRange = roomRange;
             this.wayRange = wayRange;
         }

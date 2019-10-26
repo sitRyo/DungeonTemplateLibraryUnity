@@ -12,13 +12,14 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using DTL.Random;
-using DTL.Util;
 using DTL.Base;
 using DTL.Interfaces;
+using DTL.Random;
+using DTL.Util;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 
@@ -94,17 +95,17 @@ namespace DTL.Shape {
 
         private bool CreateNext2(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> roomRect,
             List<RogueLikeOutputNumber> branchPoint, List<bool> isWay) {
-            /* 0xffff = 65536 までループを回す */
-            for (int i = 0, r = 0; i < 65536; ++i) {
+            /* 0xffff = 65535 までループを回す */
+            for (int i = 0, r = 0; i < 65535; ++i) {
                 if (!branchPoint.Any()) break;
 
                 r = rand.Next(branchPoint.Count());
-                int x = rand.Next(branchPoint[r].x, branchPoint[r].x + branchPoint[r].w - 1);
-                int y = rand.Next(branchPoint[r].y, branchPoint[r].y + branchPoint[r].h - 1);
+                int x = rand.Next(branchPoint[r].x, branchPoint[r].x + branchPoint[r].w);
+                int y = rand.Next(branchPoint[r].y, branchPoint[r].y + branchPoint[r].h);
 
                 // 方角カウンタ
                 for (int j = 0; j < (int) Direction.Count; ++j) {
-                    if (!createNext(matrix, sizeX, sizeY, roomRect, branchPoint, isWay, isWay[r], x, y,
+                    if (!CreateNext(matrix, sizeX, sizeY, roomRect, branchPoint, isWay, isWay[r], x, y,
                         (Direction) j)) continue;
                     branchPoint.RemoveAt(r);
                     isWay.RemoveAt(r);
@@ -115,7 +116,7 @@ namespace DTL.Shape {
             return false;
         }
 
-        private bool createNext(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> roomRect,
+        private bool CreateNext(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> roomRect,
             List<RogueLikeOutputNumber> branchPoint, List<bool> isWayList, bool isWay, int x_, int y_, Direction dir_) {
             int dx = 0;
             int dy = 0;
@@ -135,113 +136,114 @@ namespace DTL.Shape {
                     break;
             }
 
-            if (matrix[startX + x_ + dx, startY + y_ + dy] != rogueLikeList.roomId &&
-                matrix[startX + x_ + dx, startY + y_ + dy] != rogueLikeList.wayId) return false;
+            // 範囲外参照(meta programming 部分)
+            if (startX + x_ + dx < 0 || startX + x_ + dx >= sizeX || startY + y_ + dy < 0 ||
+                startY + y_ + dy >= sizeY) {
+                return false;
+            }
+
+            if (matrix[startY + y_ + dy, startX + x_ + dx] != rogueLikeList.roomId &&
+                matrix[startY + y_ + dy, startX + x_ + dx] != rogueLikeList.wayId) return false;
 
             if (!isWay) {
-                if (!makeWay(matrix, sizeX, sizeY, branchPoint, isWayList, x_, y_, dir_)) return false;
-                if (matrix[startX + x_ + dx, startY + y_ + dy] == rogueLikeList.roomId)
-                    matrix[x_, y_] = rogueLikeList.entranceId;
-                else matrix[x_, y_] = rogueLikeList.wayId;
+                if (!MakeWay(matrix, sizeX, sizeY, branchPoint, isWayList, x_, y_, dir_)) return false;
+                if (matrix[startY + y_ + dy, startX + x_ + dx] == rogueLikeList.roomId)
+                    matrix[y_, x_] = rogueLikeList.entranceId;
+                else matrix[y_, x_] = rogueLikeList.wayId;
+                return true;
             }
 
             // 1/2
             if (rand.Probability(0.5)) {
                 if (!MakeRoom(matrix, sizeX, sizeY, roomRect, branchPoint, isWayList, x_, y_, dir_)) return false;
-                if (matrix[startX + x_ + dx, startY + y_ + dy] == rogueLikeList.roomId) {
-                    matrix[x_, y_] = rogueLikeList.entranceId;
-                }
-                else {
-                    matrix[x_, y_] = rogueLikeList.wayId;
-                }
-
+                matrix[y_, x_] = rogueLikeList.entranceId;
                 return true;
             }
 
             // 通路を生成
-            if (!makeWay(matrix, sizeX, sizeY, branchPoint, isWayList, x_, y_, dir_)) return false;
-            if (matrix[startX + x_ + dx, startY + y_ + dy] == rogueLikeList.roomId) {
-                matrix[x_, y_] = rogueLikeList.entranceId;
+            if (!MakeWay(matrix, sizeX, sizeY, branchPoint, isWayList, x_, y_, dir_)) return false;
+            if (matrix[startY + y_ + dy, startX + x_ + dx] == rogueLikeList.roomId) {
+                matrix[y_, x_] = rogueLikeList.entranceId;
             }
             else {
-                matrix[x_, y_] = rogueLikeList.wayId;
+                matrix[y_, x_] = rogueLikeList.wayId;
             }
 
             return true;
         }
 
-        private bool makeWay(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> branchPoint,
+        private bool MakeWay(int[,] matrix, uint sizeX, uint sizeY, List<RogueLikeOutputNumber> branchPoint,
             List<bool> isWay,
             int x_, int y_, Direction dir_) {
-            RogueLikeOutputNumber way = new RogueLikeOutputNumber();
-            way.x = x_;
-            way.y = y_;
+            var way_ = new RogueLikeOutputNumber {
+                x = x_,
+                y = y_
+            };
 
             // 左右
             if (rand.Probability(0.5)) {
-                way.w = rand.Next(wayRange.x, wayRange.x + wayRange.w - 1);
-                way.h = 1;
+                way_.w = rand.Next(wayRange.x, wayRange.x + wayRange.w);
+                way_.h = 1;
                 switch (dir_) {
                     case Direction.North:
-                        way.y = y_ - 1;
-                        if (rand.Probability(0.5)) way.x = x_ - way.w + 1;
+                        way_.y = y_ - 1;
+                        if (rand.Probability(0.5)) way_.x = x_ - way_.w + 1;
                         break;
                     case Direction.South:
-                        way.y = y_ + 1;
-                        if (rand.Probability(0.5)) way.x = x_ - way.w + 1;
+                        way_.y = y_ + 1;
+                        if (rand.Probability(0.5)) way_.x = x_ - way_.w + 1;
                         break;
                     case Direction.West:
-                        way.x = x_ - way.x;
+                        way_.x = x_ - way_.w;
                         break;
                     case Direction.East:
-                        way.x = x_ + 1;
+                        way_.x = x_ + 1;
                         break;
                 }
             }
-
             // 上下
-            if (rand.Probability(0.5)) {
-                way.w = 1;
-                way.h = rand.Next(wayRange.y, wayRange.y + wayRange.h - 1);
+            else {
+                way_.w = 1;
+                way_.h = rand.Next(wayRange.y, wayRange.y + wayRange.h);
 
                 switch (dir_) {
                     case Direction.North:
-                        way.y = y_ - way.h;
+                        way_.y = y_ - way_.h;
                         break;
                     case Direction.South:
-                        way.y = y_ + 1;
+                        way_.y = y_ + 1;
                         break;
                     case Direction.West:
-                        way.x = x_ - 1;
+                        way_.x = x_ - 1;
                         if (rand.Probability(0.5))
-                            way.y = y_ - way.h + 1;
+                            way_.y = y_ - way_.h + 1;
                         break;
                     case Direction.East:
-                        way.x = x_ + 1;
+                        way_.x = x_ + 1;
                         if (rand.Probability(0.5))
-                            way.y = y_ - way.h + 1;
+                            way_.y = y_ - way_.h + 1;
                         break;
                 }
             }
 
-            if (PlaceOutputNumber(matrix, sizeX, sizeY, way, rogueLikeList.wayId)) return false;
-            if (dir_ != Direction.South && way.w != 1) {
-                branchPoint.Add(new RogueLikeOutputNumber(way.x, way.y - 1, way.w, 1));
+            if (!PlaceOutputNumber(matrix, sizeX, sizeY, way_, rogueLikeList.wayId)) return false;
+            if (dir_ != Direction.South && way_.w != 1) {
+                branchPoint.Add(new RogueLikeOutputNumber(way_.x, way_.y - 1, way_.w, 1));
                 isWay.Add(true);
             }
 
-            if (dir_ != Direction.North && way.w != 1) {
-                branchPoint.Add(new RogueLikeOutputNumber(way.x, way.y + way.h, way.w, 1));
+            if (dir_ != Direction.North && way_.w != 1) {
+                branchPoint.Add(new RogueLikeOutputNumber(way_.x, way_.y + way_.h, way_.w, 1));
                 isWay.Add(true);
             }
 
-            if (dir_ != Direction.East && way.h != 1) {
-                branchPoint.Add(new RogueLikeOutputNumber(way.x - 1, way.y, 1, way.h));
+            if (dir_ != Direction.East && way_.h != 1) {
+                branchPoint.Add(new RogueLikeOutputNumber(way_.x - 1, way_.y, 1, way_.h));
                 isWay.Add(true);
             }
 
-            if (dir_ != Direction.West && way.h != 1) {
-                branchPoint.Add(new RogueLikeOutputNumber(way.x + way.w, way.y, 1, way.h));
+            if (dir_ != Direction.West && way_.h != 1) {
+                branchPoint.Add(new RogueLikeOutputNumber(way_.x + way_.w, way_.y, 1, way_.h));
                 isWay.Add(true);
             }
 
@@ -252,8 +254,8 @@ namespace DTL.Shape {
             List<RogueLikeOutputNumber> branchPoint, List<bool> isWay, int x_, int y_, Direction dir_,
             bool firstRoom = false) {
             var room = new RogueLikeOutputNumber();
-            room.w = rand.Next(roomRange.x, roomRange.x + roomRange.w - 1);
-            room.h = rand.Next(roomRange.y, roomRange.y + roomRange.h - 1);
+            room.w = rand.Next(roomRange.x, roomRange.x + roomRange.w);
+            room.h = rand.Next(roomRange.y, roomRange.y + roomRange.h);
 
             switch (dir_) {
                 case Direction.North:
@@ -303,11 +305,15 @@ namespace DTL.Shape {
         }
 
         private bool PlaceOutputNumber(int[,] matrix, uint sizeX, uint sizeY, RogueLikeOutputNumber rect, int tile) {
-            if (rect.x < 1 || rect.y < 1 || rect.x + rect.w > sizeX - 1 || rect.y + rect.h > sizeY - 1) return false;
+            if (rect.x < 1 || rect.y < 1 || rect.x + rect.w > sizeX - 1 || rect.y + rect.h > sizeY - 1) {
+                return false;
+            }
 
             for (int y = rect.y; y < rect.y + rect.h; ++y) {
                 for (int x = rect.x; x < rect.x + rect.w; ++x) {
-                    if (matrix[startY + y, startX + x] != rogueLikeList.outsideWallId) return false;
+                    if (matrix[startY + y, startX + x] != rogueLikeList.outsideWallId) {
+                        return false;
+                    }
                 }
             }
 

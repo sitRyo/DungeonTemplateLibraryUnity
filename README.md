@@ -1,6 +1,6 @@
 # Dungeon Template Library for Unity [![BSL-1.0](https://img.shields.io/badge/license-BSL--1.0-blue.svg)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
 
-[![Unity](https://kasugaccho.github.io/DungeonPicture/Picture/Unity/logo_unity_240.png)](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)
+[![Unity](https://kasugaccho.github.io/DungeonPicture/Picture/Unity/logo_unity_240.gif)](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)
 
 ---
 

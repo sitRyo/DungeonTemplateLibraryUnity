@@ -25,11 +25,22 @@ namespace DTL.Util {
             b = tmp;
         }
 
-
         public static T[] Shuffle<T>(T[] array) {
             int arrayLength = array.Length;
             XorShift128 rand = new XorShift128();
             for (int i = 0; i < arrayLength; ++i) {
+                Swap(ref array[i], ref array[rand.Next(0, (uint)arrayLength)]);
+            }
+
+            return array;
+        }
+
+        // shuffle array from 0 to max - 1 =- [0, max)
+        public static T[] Shuffle<T>(T[] array, uint max) {
+            int arrayLength = array.Length;
+            max = max > arrayLength ? (uint)arrayLength : max;
+            XorShift128 rand = new XorShift128();
+            for (int i = 0; i < max; ++i) {
                 Swap(ref array[i], ref array[rand.Next(0, (uint)arrayLength)]);
             }
 

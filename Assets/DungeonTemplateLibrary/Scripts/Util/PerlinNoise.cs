@@ -20,7 +20,7 @@ namespace DTL.Util {
     // PerlinNoise Utilities. Expect double or float.
     public class PerlinNoise {
         /* private member */
-        private XorShift128 rand = new XorShift128();
+        private XorShift128 rand;
         private int[] p = new int[512];
 
         /* private members */
@@ -105,7 +105,7 @@ namespace DTL.Util {
             double noiseValue = 0;
             double amp = 1.0;
             for (int i = 0; i < octaves; ++i) {
-                noiseValue = this.SetNoise(x) * amp;
+                noiseValue += this.SetNoise(x) * amp;
                 x *= 2.0;
                 amp *= 0.5;
             }
@@ -117,7 +117,7 @@ namespace DTL.Util {
             double noiseValue = 0;
             double amp = 1.0;
             for (int i = 0; i < octaves; ++i) {
-                noiseValue = this.SetNoise(x) * amp;
+                noiseValue += this.SetNoise(x, y) * amp;
                 x *= 2.0;
                 y *= 2.0;
                 amp *= 0.5;
@@ -130,7 +130,7 @@ namespace DTL.Util {
             double noiseValue = 0;
             double amp = 1.0;
             for (int i = 0; i < octaves; ++i) {
-                noiseValue = this.SetNoise(x) * amp;
+                noiseValue += this.SetNoise(x, y, z) * amp;
                 x *= 2.0;
                 y *= 2.0;
                 z *= 2.0;
@@ -155,17 +155,17 @@ namespace DTL.Util {
 
 
         //オクターブ有りノイズを取得する
-        public double OctaveNoise(uint octaves_, int x) {
+        public double OctaveNoise(uint octaves_, double x) {
             double noiseValue = SetOctaveNoise(octaves_, x) * 0.5 + 0.5;
             return (noiseValue >= 1.0) ? 1.0 : (noiseValue <= 0.0) ? 0.0 : noiseValue;
         }
 
-        public double OctaveNoise(uint octaves_, int x, int y) {
+        public double OctaveNoise(uint octaves_, double x, double y) {
             double noiseValue = SetOctaveNoise(octaves_, x, y) * 0.5 + 0.5;
             return (noiseValue >= 1.0) ? 1.0 : (noiseValue <= 0.0) ? 0.0 : noiseValue;
         }
 
-        public double OctaveNoise(uint octaves_, int x, int y, int z) {
+        public double OctaveNoise(uint octaves_, double x, double y, double z) {
             double noiseValue = SetOctaveNoise(octaves_, x, y, z) * 0.5 + 0.5;
             return (noiseValue >= 1.0) ? 1.0 : (noiseValue <= 0.0) ? 0.0 : noiseValue;
         }
@@ -174,7 +174,7 @@ namespace DTL.Util {
         public void SetSeed(uint seed) {
             for (int i = 0; i < 256; ++i)
                 this.p[i] = i;
-            ArrayUtil.Shuffle(p, 256);
+            ArrayUtil.Shuffle(p, 256, rand);
             for (int i = 0; i < 256; ++i) {
                 this.p[256 + i] = this.p[i];
             }
@@ -185,6 +185,8 @@ namespace DTL.Util {
         } // = default();
 
         public PerlinNoise(int seed) {
+            this.rand = new XorShift128((uint)seed);
+            SetSeed((uint) seed);
         }
     }
 }

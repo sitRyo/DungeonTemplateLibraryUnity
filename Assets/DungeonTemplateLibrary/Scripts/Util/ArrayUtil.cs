@@ -13,10 +13,10 @@
 #######################################################################################*/
 
 using DTL.Random;
+using UnityEngine;
 
 namespace DTL.Util {
     public static class ArrayUtil {
-
 
         static void Swap<T>(ref T a, ref T b) {
             T tmp;
@@ -25,21 +25,23 @@ namespace DTL.Util {
             b = tmp;
         }
 
-        public static T[] Shuffle<T>(T[] array, XorShift128 rand) {
+        public static T[] Shuffle<T, TRand>(T[] array, TRand rand) where TRand : IRandomable {
             int arrayLength = array.Length;
             for (int i = 0; i < arrayLength; ++i) {
-                Swap(ref array[i], ref array[rand.Next(0, (uint)arrayLength)]);
+                Swap(ref array[i], ref array[rand.Next((uint)arrayLength - 1)]);
             }
 
             return array;
         }
 
         // shuffle array from 0 to max - 1 =- [0, max)
-        public static T[] Shuffle<T>(T[] array, uint max, XorShift128 rand) {
-            int arrayLength = array.Length;
-            max = max > arrayLength ? (uint)arrayLength : max;
+        public static T[] Shuffle<T, TRand>(T[] array, uint max, TRand rand) where TRand : IRandomable {
+            uint arrayLength = (uint)array.Length;
+            max = max > arrayLength - 1 ? arrayLength : max;
+//            Debug.Log(int)max);
+            Debug.Log(arrayLength);
             for (int i = 0; i < max; ++i) {
-                Swap(ref array[i], ref array[rand.Next(0, max)]);
+                Swap(ref array[i], ref array[rand.Next(max)]);
             }
 
             return array;

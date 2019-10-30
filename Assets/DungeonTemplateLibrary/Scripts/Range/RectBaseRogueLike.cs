@@ -12,11 +12,9 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
-using System;
 using DTL.Base;
 using DTL.Shape;
 using DTL.Util;
-using DTL.Interfaces;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Range {

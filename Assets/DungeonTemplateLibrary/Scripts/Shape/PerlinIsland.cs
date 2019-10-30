@@ -14,12 +14,10 @@
 
 using DTL.Range;
 using DTL.Random;
-using DTL.Interfaces;
-using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
-using System;
 using DTL.Util;
+using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
-namespace DTL.Range {
+namespace DTL.Shape {
     public class PerlinIsland : RectBasePerlin<PerlinIsland>, IDrawer<int> {
         private XorShift128 rand = new XorShift128();
 
@@ -30,15 +28,22 @@ namespace DTL.Range {
         private bool DrawNormal(int[,] matrix) {
             uint endX = CalcEndX(MatrixUtil.GetX(matrix));
             uint endY = CalcEndY(MatrixUtil.GetY(matrix));
+
             PerlinNoise perlin = new PerlinNoise((int) rand.Next());
 
             double frequencyX = (endX - startX) / frequency;
             double frequencyY = (endY - startY) / frequency;
 
-            for (uint row = startY; row < endY; ++row)
-            for (uint col = startX; col < endX; ++col)
-                matrix[row, col] = minHeight = this.minHeight + (maxHeight - minHeight) *
-                                               (int)perlin.OctaveNoise(octaves, (int) (col / frequencyX), (int) (row / frequencyY));
+//            Debug.Log(frequencyX + " " + maxHeight);
+
+            for (uint row = startY; row < endY; ++row) {
+                for (uint col = startX; col < endX; ++col) {
+                    matrix[row, col] = minHeight + minHeight + (int)((double)(maxHeight - minHeight) *
+                                       perlin.OctaveNoise(octaves, (col / frequencyX),
+                                           (row / frequencyY)));
+                }
+            }
+
             return true;
         }
 

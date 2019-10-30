@@ -41,7 +41,7 @@ namespace DTL.Util {
             max = max > arrayLength ? (uint)arrayLength : max;
             XorShift128 rand = new XorShift128();
             for (int i = 0; i < max; ++i) {
-                Swap(ref array[i], ref array[rand.Next(0, (uint)arrayLength)]);
+                Swap(ref array[i], ref array[rand.Next(0, max)]);
             }
 
             return array;

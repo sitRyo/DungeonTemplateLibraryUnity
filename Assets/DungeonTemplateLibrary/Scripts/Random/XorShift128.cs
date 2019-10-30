@@ -13,11 +13,12 @@
 #######################################################################################*/
 
 using System;
+using UnityEngine;
 
 namespace DTL.Random {
 
     /* Xorshift: generates random numbers */
-    public class XorShift128 {
+    public class XorShift128 : IRandomable {
         private System.Random rand;
 
         private uint x = 31419265;
@@ -39,6 +40,10 @@ namespace DTL.Random {
             y = z;
             z = w;
             return w = (w ^ (w >> 19)) ^ (t ^ (t << 8));
+        }
+
+        public uint Next(uint max) {
+            return Next() % max;
         }
 
         // Generate random number between [min, max). Note! max >= min

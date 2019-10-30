@@ -38,8 +38,6 @@ namespace DTL.Util {
         public static T[] Shuffle<T, TRand>(T[] array, uint max, TRand rand) where TRand : IRandomable {
             uint arrayLength = (uint)array.Length;
             max = max > arrayLength - 1 ? arrayLength : max;
-//            Debug.Log(int)max);
-            Debug.Log(arrayLength);
             for (int i = 0; i < max; ++i) {
                 Swap(ref array[i], ref array[rand.Next(max)]);
             }

@@ -136,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1042645460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.47757, y: -19.560097, z: 21.695982}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -153,6 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c6e49bd7a9dca42841355d78806c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cubes:
+  - {fileID: 1154980288361958, guid: 75046f14c81c9944d98cdc9c1e44b3af, type: 2}
+  - {fileID: 1154980288361958, guid: 85b97e54f61d2c94095dca5d585e7166, type: 2}
+  - {fileID: 1154980288361958, guid: c69b177d270afb54d89943b66189710f, type: 2}
+  - {fileID: 1154980288361958, guid: db6bf3491517c344898180de3c7892b2, type: 2}
+  - {fileID: 1154980288361958, guid: eca6220df3cbda446ada2a1f4e369e77, type: 2}
+  - {fileID: 1154980288361958, guid: 460d4e99fd9d68e4eb62f1813eb60b42, type: 2}
+  - {fileID: 1154980288361958, guid: 2cb7646ef39c9a64390acef5e70c5015, type: 2}
+  - {fileID: 1154980288361958, guid: 57e162a4387f0f3479e99397a343f964, type: 2}
 --- !u!1 &1581106488
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +268,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.9811321, g: 0.8076502, b: 0.31933072, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30

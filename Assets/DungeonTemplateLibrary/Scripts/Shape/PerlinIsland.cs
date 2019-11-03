@@ -12,6 +12,8 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
+using System;
+using System.Linq;
 using DTL.Range;
 using DTL.Random;
 using DTL.Util;
@@ -23,6 +25,20 @@ namespace DTL.Shape {
 
         public bool Draw(int[,] matrix) {
             return DrawNormal(matrix);
+        }
+
+        public bool DrawNormalize(float[,] matrix) {
+            int[,] convertedMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
+
+            // I cannot use LINQ for 2 dim array. Please tell me how to use LINQ for 2 dim array...orz
+            for (int y = 0; y < MatrixUtil.GetY(matrix); ++y) {
+                for (int x = 0; x < MatrixUtil.GetX(matrix); ++x) {
+                    convertedMatrix[y, x] = (int) matrix[y, x];
+                }
+            }
+            DrawNormal(convertedMatrix);
+            Normalize(convertedMatrix, matrix);
+            return true;
         }
 
         private bool DrawNormal(int[,] matrix) {
@@ -45,6 +61,15 @@ namespace DTL.Shape {
             }
 
             return true;
+        }
+
+        private void Normalize(int[,] matrix, float[,] retMatrix) {
+            // use maxHeight from derived class.
+            for (int y = 0; y < MatrixUtil.GetY(matrix); ++y) {
+                for (int x = 0; x < MatrixUtil.GetX(matrix); ++x) {
+                    retMatrix[y, x] = (float) matrix[y, x] / maxHeight;
+                }
+            }
         }
 
         public PerlinIsland() {

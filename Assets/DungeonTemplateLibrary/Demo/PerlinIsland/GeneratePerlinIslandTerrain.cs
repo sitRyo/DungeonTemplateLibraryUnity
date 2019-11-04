@@ -17,10 +17,8 @@ using DTL.Shape;
 using DTL.Random;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 public class GeneratePerlinIslandTerrain : MonoBehaviour {
-
     public int depth = 50;
     public int height = 200;
     public int width = 200;
@@ -34,7 +32,7 @@ public class GeneratePerlinIslandTerrain : MonoBehaviour {
 
     public List<Texture2D> texture2D = new List<Texture2D>();
 
-    void Start () {
+    void Start() {
         this.terrain = GetComponent<Terrain>();
         var terrainData = terrain.terrainData;
         var matrix = new float[height, width];
@@ -59,6 +57,7 @@ public class GeneratePerlinIslandTerrain : MonoBehaviour {
     private void GeneratePerlinIsland(float[,] matrix) {
         perlinIsland = new PerlinIsland(frequency, octaves, maxHeight);
         perlinIsland.DrawNormalize(matrix);
+        Smooth(matrix, 2);
     }
 
     private void SetResolutions(TerrainData ter, int alpha, int height) {
@@ -76,6 +75,39 @@ public class GeneratePerlinIslandTerrain : MonoBehaviour {
         }
 
         return splatPrototype;
+    }
+
+    private void Smooth(float[,] heightMap, int iterationNum) {
+        // Height = height
+        // Width = width
+        // 周囲のマスと自分の高さから平均化
+
+        var dh = new[] {1, -1, 0, 0};
+        var dw = new[] {0, 0, 1, -1};
+        for (int iter = 0; iter < iterationNum; ++iter) {
+            for (var h = 0; h < height; ++h) {
+                for (var w = 0; w < width; ++w) {
+                    // 配列の範囲内の8方向の高さを加算
+                    var cumulative = 0;
+                    float cumulativeValue = 0f;
+                    for (int i = 0; i < 4; ++i) {
+                        var nh = h + dh[i];
+                        var nw = w + dw[i];
+
+                        if (nh >= 0 && nw >= 0 && nh < height && nw < width) {
+                            ++cumulative;
+                            cumulativeValue += heightMap[nh, nw];
+                        }
+                    }
+
+                    // 自分を足す
+                    cumulativeValue += heightMap[h, w];
+                    ++cumulative;
+//                    Debug.Log(cumulativeValue);
+                    heightMap[h, w] = (float) cumulativeValue / cumulative;
+                }
+            }
+        }
     }
 
     private float[,,] GetTexture(float[,] matrix, int w, int h) {

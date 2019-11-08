@@ -319,15 +319,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fecf0a5a9edbc14f8092c2bde455a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 50
-  height: 48
-  width: 32
+  depth: 500
+  height: 1024
+  width: 1024
   truncatedProportion: 0.8
   mountainProportion: 0.4
   frequency: 6
   octaves: 8
   maxHeight: 60
-  texture2D: []
+  texture2D:
+  - {fileID: 2800000, guid: ef5c51cfa2ce46043a41a376b560c525, type: 3}
+  - {fileID: 2800000, guid: c6e0767b1f8c34890ac245217f4b9731, type: 3}
+  - {fileID: 2800000, guid: 0a45c60f961954cf49cbc3cde58c6d27, type: 3}
 --- !u!1 &1258846425
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,11 +43,13 @@ namespace DTL.Random {
         }
 
         public uint Next(uint max) {
+            if (max == 0) return 0;
             return Next() % max;
         }
 
         // Generate random number between [min, max). Note! max >= min
         public uint Next(uint min, uint max) {
+            if (max == 0) return 0;
             return min + Next() % (max - min);
         }
 

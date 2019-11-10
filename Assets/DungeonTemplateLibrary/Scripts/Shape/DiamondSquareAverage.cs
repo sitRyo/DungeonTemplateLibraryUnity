@@ -12,6 +12,7 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
+using System;
 using DTL.Random;
 
 namespace DTL.Shape {
@@ -20,7 +21,7 @@ namespace DTL.Shape {
         // Diamond Square
         public static void CreateDiamondSquareAverage<TRand>(int[,] matrix_, uint startX, uint startY,
             uint x_, uint y_, uint size_, int t1_, int t2_, int t3_, int t4_, int maxValue_, int addAltitude_,
-            TRand rand) where TRand : IRandomable {
+            TRand rand, Func<int, int> func) where TRand : IRandomable {
             // 再起の終了処理
             if (size_ == 0) return;
             int vertexRand = (int) rand.Next((uint) addAltitude_);
@@ -39,13 +40,13 @@ namespace DTL.Shape {
             size_ /= 2;
 
             CreateDiamondSquareAverage(matrix_, startX, startY, x_ - size_, y_ - size_, size_, t1_, s1, s2,
-                matrix_[startY + y_, startX + x_], maxValue_, addAltitude_, rand);
+                matrix_[startY + y_, startX + x_], maxValue_, func(addAltitude_), rand, func);
             CreateDiamondSquareAverage(matrix_, startX, startY, x_ - size_, y_ + size_, size_, s1, t2_,
-                matrix_[startY + y_, startX + x_], s3, maxValue_, addAltitude_, rand);
+                matrix_[startY + y_, startX + x_], s3, maxValue_, func(addAltitude_), rand, func);
             CreateDiamondSquareAverage(matrix_, startX, startY, x_ + size_, y_ - size_, size_, s2,
-                matrix_[startY + y_, startX + x_], t3_, s4, maxValue_, addAltitude_, rand);
+                matrix_[startY + y_, startX + x_], t3_, s4, maxValue_, func(addAltitude_), rand, func);
             CreateDiamondSquareAverage(matrix_, startX, startY, x_ + size_, y_ + size_, size_,
-                matrix_[startY + y_, startX + x_], s3, s4, t4_, maxValue_, addAltitude_, rand);
+                matrix_[startY + y_, startX + x_], s3, s4, t4_, maxValue_, func(addAltitude_), rand, func);
         }
     }
 }

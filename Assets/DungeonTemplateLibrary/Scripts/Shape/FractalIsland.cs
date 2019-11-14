@@ -18,6 +18,7 @@ using DTL.Random;
 using DTL.Shape;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 using System;
+using UnityEngine;
 
 /**
  * Fractal Island
@@ -32,7 +33,7 @@ namespace DTL.Shape {
 
         // fractal island の１チャンクの大きさ
         // Diamond Square は2^N + 1 * 2^N + 1 の大きさしかにしかheightmapをレンダーできない。
-        private const int fiChunkSize = 16; 
+        private readonly int fiChunkSize = 16;
 
         public bool Draw(int[,] matrix) {
             return DrawNormal(matrix);
@@ -40,15 +41,13 @@ namespace DTL.Shape {
 
         private bool DrawNormal(int[,] matrix) {
             var chunkMatrix = new int[fiChunkSize + 1, fiChunkSize + 1];
-
             var endX = CalcEndX(MatrixUtil.GetX(matrix));
             var endY = CalcEndY(MatrixUtil.GetY(matrix));
 
             if (this.altitude < 2) return false;
 
-            // チャンク足りなくならないか？
-            int chunkX = (int)(endX - this.startX) / fiChunkSize;
-            int chunkY = (int)(endY - this.startY) / fiChunkSize;
+            int chunkX = (int) (endX - this.startX) / fiChunkSize;
+            int chunkY = (int) (endY - this.startY) / fiChunkSize;
 
             var randUp = new int[chunkX + 1];
             var randDown = new int[chunkX + 1]; // バグ？(ではないっぽい)
@@ -58,14 +57,14 @@ namespace DTL.Shape {
             }
 
             for (var row = 0; row < chunkY; ++row) {
-                if ((row + 1) == chunkY) {
+                if (row + 1 == chunkY) {
                     for (var col = 0; col <= chunkX; ++col) {
                         randDown[col] = 0;
                     }
                 }
-                else {
+                else { 
                     for (var col = 1; col < chunkX; ++col) {
-                        randDown[col] = (int)rand.Next((uint)this.altitude);
+                        randDown[col] = (int) rand.Next((uint) this.altitude);
                     }
 
                     randDown[0] = 0;
@@ -79,7 +78,7 @@ namespace DTL.Shape {
                     chunkMatrix[fiChunkSize, fiChunkSize] = randDown[col + 1];
 
                     // 地形の生成
-                    this.createWorldMapSimple(chunkMatrix);
+                    this.CreateWorldMapSimple(chunkMatrix);
 
                     for (var row2 = 0; row2 < fiChunkSize; ++row2) {
                         for (var col2 = 0; col2 < fiChunkSize; ++col2) {
@@ -97,13 +96,13 @@ namespace DTL.Shape {
             return true;
         }
 
-        private void createWorldMapSimple(int[,] chunkMatrix) {
-            createWorldMap(chunkMatrix, (int x) => x / 2);
+        private void CreateWorldMapSimple(int[,] chunkMatrix) {
+            CreateWorldMap(chunkMatrix, (int x) => x / 2);
         }
 
-        private void createWorldMap(int[,] chunkMatrix, Func<int, int> func) {
-            DiamondSquareAverage.CreateDiamondSquareAverage(chunkMatrix, 0, 0, fiChunkSize / 2, fiChunkSize / 2,
-                fiChunkSize / 2, chunkMatrix[0, 0], chunkMatrix[fiChunkSize, 0], chunkMatrix[0, fiChunkSize],
+        private void CreateWorldMap(int[,] chunkMatrix, Func<int, int> func) {
+            DiamondSquareAverage.CreateDiamondSquareAverage(chunkMatrix, 0, 0, (uint)fiChunkSize / 2, (uint)fiChunkSize / 2,
+                (uint)fiChunkSize / 2, chunkMatrix[0, 0], chunkMatrix[fiChunkSize, 0], chunkMatrix[0, fiChunkSize],
                 chunkMatrix[fiChunkSize, fiChunkSize], this.minValue + this.altitude, this.addAltitude, rand, func
             );
         }

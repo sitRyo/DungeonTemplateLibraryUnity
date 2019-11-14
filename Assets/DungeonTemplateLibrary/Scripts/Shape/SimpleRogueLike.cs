@@ -27,7 +27,7 @@ namespace DTL.Shape {
         [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
     #######################################################################################*/
 
-    public class SimpleRogueLike : DTL.Range.RectBaseSimpleRogueLike<SimpleRogueLike> {
+    public sealed class SimpleRogueLike : DTL.Range.RectBaseSimpleRogueLike<SimpleRogueLike> {
 
         private DTLRandom rand = new DTLRandom();
 

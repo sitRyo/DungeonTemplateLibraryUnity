@@ -28,7 +28,7 @@ using UnityEngine;
  */
 
 namespace DTL.Shape {
-    public class FractalIsland : RectBaseFractal<FractalIsland>, IDrawer<int> {
+    public sealed class FractalIsland : RectBaseFractal<FractalIsland>, IDrawer<int> {
         private XorShift128 rand = new XorShift128();
 
         // fractal island の１チャンクの大きさ
@@ -37,6 +37,31 @@ namespace DTL.Shape {
 
         public bool Draw(int[,] matrix) {
             return DrawNormal(matrix);
+        }
+
+        public bool DrawNormalize(float[,] matrix) {
+            int[,] convertedMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
+
+            // I cannot use LINQ for 2 dim array. Please tell me how to use LINQ for 2 dim array...orz
+            for (int y = 0; y < MatrixUtil.GetY(matrix); ++y) {
+                for (int x = 0; x < MatrixUtil.GetX(matrix); ++x) {
+                    convertedMatrix[y, x] = (int)matrix[y, x];
+                }
+            }
+
+            DrawNormal(convertedMatrix);
+            Normalize(convertedMatrix, matrix);
+            return true;
+        }
+
+        private void Normalize(int[,] matrix, float[,] retMatrix) {
+            var maxHeight = MatrixUtil.GetMax(matrix);
+
+            for (int y = 0; y < MatrixUtil.GetY(matrix); ++y) {
+                for (int x = 0; x < MatrixUtil.GetX(matrix); ++x) {
+                    retMatrix[y, x] = (float)matrix[y, x] / maxHeight;
+                }
+            }
         }
 
         private bool DrawNormal(int[,] matrix) {

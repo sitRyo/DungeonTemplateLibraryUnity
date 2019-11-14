@@ -45,7 +45,7 @@ namespace DTL.Shape {
 
     /* The type of array to store dungeon data is int[,] */
 
-    public class RogueLike : DTL.Range.RectBaseRogueLike<RogueLike>, IDrawer<int> {
+    public sealed class RogueLike : DTL.Range.RectBaseRogueLike<RogueLike>, IDrawer<int> {
         private DTLRandom rand = new DTLRandom();
 
         enum Direction : uint {

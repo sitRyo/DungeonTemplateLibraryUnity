@@ -72,7 +72,7 @@ namespace DTL.Console {
         // constructors
         public OutputConsole() { } // default
 
-        public OutputConsole(string lhs, string rhs, Func<int, bool> func) {
+        public OutputConsole(Func<int, bool> func, string lhs, string rhs) {
             this.lhs = lhs;
             this.rhs = rhs;
             this.func = func;

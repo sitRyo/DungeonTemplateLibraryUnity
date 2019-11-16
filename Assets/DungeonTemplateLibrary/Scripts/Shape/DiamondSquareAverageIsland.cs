@@ -36,12 +36,37 @@ public class DiamondSquareAverageIsland : RectBaseFractal<DiamondSquareAverageIs
         return DrawNormal(matrix);
     }
 
-    public bool DrawNormal(int[,] matrix) {
+    private bool DrawNormal(int[,] matrix) {
         if (this.altitude < 2) return false;
         return (this.width == 0)
             ? DrawSTL(matrix, CalcEndY(MatrixUtil.GetY(matrix)))
             : DrawWidthSTL(matrix, this.startX + this.width, this.CalcEndY(MatrixUtil.GetY(matrix)));
         // return DrawSTL(matrix, CalcEndY(MatrixUtil.GetY(matrix)));
+    }
+
+    public bool DrawNormalize(float[,] matrix) {
+        int[,] convertedMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
+
+        // I cannot use LINQ for 2 dim array. Please tell me how to use LINQ for 2 dim array...orz
+        for (int y = 0; y < MatrixUtil.GetY(matrix); ++y) {
+            for (int x = 0; x < MatrixUtil.GetX(matrix); ++x) {
+                convertedMatrix[y, x] = (int)matrix[y, x];
+            }
+        }
+
+        DrawNormal(convertedMatrix);
+        Normalize(convertedMatrix, matrix);
+        return true;
+    }
+
+    private void Normalize(int[,] matrix, float[,] retMatrix) {
+        var maxHeight = MatrixUtil.GetMax(matrix);
+
+        for (int y = 0; y < MatrixUtil.GetY(matrix); ++y) {
+            for (int x = 0; x < MatrixUtil.GetX(matrix); ++x) {
+                retMatrix[y, x] = (float)matrix[y, x] / maxHeight;
+            }
+        }
     }
 
     private bool DrawWidthSTL(int[,] matrix, uint endX, uint endY) {

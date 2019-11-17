@@ -122,6 +122,39 @@ namespace DTL.Util {
                 textureToHeight.Add(hValue + dh);
         }
 
+        private void Smooth(float[,] heightMap, int iterationNum) {
+            // Height = height
+            // Width = width
+            // 周囲のマスと自分の高さから平均化
+
+            var dh = new[] { 1, -1, 0, 0 };
+            var dw = new[] { 0, 0, 1, -1 };
+            for (int iter = 0; iter < iterationNum; ++iter) {
+                for (var h = 0; h < height; ++h) {
+                    for (var w = 0; w < width; ++w) {
+                        // 配列の範囲内の8方向の高さを加算
+                        var cumulative = 0;
+                        float cumulativeValue = 0f;
+                        for (int i = 0; i < 4; ++i) {
+                            var nh = h + dh[i];
+                            var nw = w + dw[i];
+
+                            if (nh >= 0 && nw >= 0 && nh < height && nw < width) {
+                                ++cumulative;
+                                cumulativeValue += heightMap[nh, nw];
+                            }
+                        }
+
+                        // 自分を足す
+                        cumulativeValue += heightMap[h, w];
+                        ++cumulative;
+                        //                    Debug.Log(cumulativeValue);
+                        heightMap[h, w] = (float)cumulativeValue / cumulative;
+                    }
+                }
+            }
+        }
+
         public TerrainUtil(Terrain terrain, List<Texture2D> texture2D, ITerrainDrawer terrainGenerator,
             int height, int width, int depth) {
             this.terrain = terrain;

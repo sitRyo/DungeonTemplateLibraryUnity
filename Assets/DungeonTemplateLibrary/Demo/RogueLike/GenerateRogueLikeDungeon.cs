@@ -12,6 +12,7 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
+using DTL.Console;
 using UnityEngine;
 using DTL.Shape;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
@@ -48,7 +49,7 @@ public class GenerateRogueLikeDungeon : MonoBehaviour {
     void Start() {
         int[,] matrix = new int[height, width];
         rogueLike.Draw(matrix);
-        ConsoleDraw(matrix);
+        new OutputConsole().Draw(matrix);
         DungeonInstantiate(matrix, height, width);
     }
 
@@ -76,15 +77,4 @@ public class GenerateRogueLikeDungeon : MonoBehaviour {
             }
         }
     }
-
-    private void ConsoleDraw(int[,] matrix) {
-        string s = "\n";
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j)
-                s += matrix[i, j].ToString();
-            s += "\n";
-        }
-        Debug.Log(s);
-    }
-
 }

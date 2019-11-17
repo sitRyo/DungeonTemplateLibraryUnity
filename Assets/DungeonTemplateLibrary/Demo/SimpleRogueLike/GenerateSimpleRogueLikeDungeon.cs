@@ -13,6 +13,7 @@
 #######################################################################################*/
 
 using System;
+using DTL.Console;
 using UnityEngine;
 using DTL.Shape;
 using RangeMatrix = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
@@ -50,7 +51,7 @@ public class GenerateSimpleRogueLikeDungeon : MonoBehaviour {
     private void Start() {
         int[,] matrix = new int[height, width];
         simpleRogueLike.Draw(matrix);
-        ConsoleDraw(matrix);
+        new OutputConsole().Draw(matrix);
         DungeonInstantiate(matrix);
     }
 
@@ -64,15 +65,5 @@ public class GenerateSimpleRogueLikeDungeon : MonoBehaviour {
                 }
             }
         }
-    }
-
-    private void ConsoleDraw(int[,] matrix) {
-        string s = "\n";
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j)
-                s += matrix[i, j].ToString();
-            s += "\n";
-        }
-        Debug.Log(s);
     }
 }

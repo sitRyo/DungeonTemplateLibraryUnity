@@ -12,6 +12,7 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
+using DTL.Console;
 using UnityEngine;
 using DTL.Shape;
 
@@ -25,21 +26,10 @@ public class GeneratePerlinSolitaryIsland : MonoBehaviour {
         var matrix = new int[height, width];
         perlinSolitaryIsland = new PerlinSolitaryIsland(0.8, 0.4, 6.0, 8, 60);
         perlinSolitaryIsland.Draw(matrix);
-        ConsoleDraw(matrix, height, width);
+
+        new OutputConsole().Draw(matrix);
     }
 
-    private void ConsoleDraw(int[,] matrix, int h, int w) {
-        string relt = "\n";
-        for (int i = 0; i < h; ++i) {
-            string str = "";
-            for (int j = 0; j < w; ++j) {
-                str += matrix[i, j].ToString() + " ";
-            }
 
-            relt += str + "\n";
-        }
-
-        Debug.Log(relt);
-    }
 }
 

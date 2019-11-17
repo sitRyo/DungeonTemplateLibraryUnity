@@ -16,6 +16,7 @@ using DTL.Range;
 using DTL.Shape;
 using UnityEngine;
 using System.Collections.Generic;
+using DTL.Console;
 
 public class GeneratePerlinIsland : MonoBehaviour {
     public const int height = 200;
@@ -29,7 +30,7 @@ public class GeneratePerlinIsland : MonoBehaviour {
         var matrix = new int[height, width];
         perlinIsland = new PerlinIsland(6.0, 8, 150);
         perlinIsland.Draw(matrix);
-        ConsoleDraw(matrix, height, width);
+        new OutputConsole().Draw(matrix);
         Generate(height, width, matrix, 150);
     }
 
@@ -71,20 +72,6 @@ public class GeneratePerlinIsland : MonoBehaviour {
         }
 
         return limit;
-    }
-
-    private void ConsoleDraw(int[,] matrix, int h, int w) {
-        string relt = "\n";
-        for (int i = 0; i < h; ++i) {
-            string str = "";
-            for (int j = 0; j < w; ++j) {
-                str += matrix[i, j].ToString() + " ";
-            }
-
-            relt += str + "\n";
-        }
-
-        Debug.Log(relt);
     }
 
 }

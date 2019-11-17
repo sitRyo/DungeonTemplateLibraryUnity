@@ -12,6 +12,7 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
+using DTL.Console;
 using DTL.Shape;
 using UnityEngine;
 
@@ -28,20 +29,9 @@ public class GenerateFractalIsland : MonoBehaviour {
         var matrix = new int[height, width];
 		fractalIsland = new FractalIsland(minValue, altitude, addAltitude);
         fractalIsland.Draw(matrix);
-        ConsoleDraw(matrix, height, width);
+
+        new OutputConsole().Draw(matrix);
+        new OutputConsole(arg => arg < 100, "..", "##").Draw(matrix);
     }
 
-    private void ConsoleDraw(int[,] matrix, int h, int w) {
-        string relt = "\n";
-        for (int i = 0; i < h; ++i) {
-            string str = "";
-            for (int j = 0; j < w; ++j) {
-                str += matrix[i, j].ToString() + " ";
-            }
-
-            relt += str + "\n";
-        }
-
-        Debug.Log(relt);
-    }
 }

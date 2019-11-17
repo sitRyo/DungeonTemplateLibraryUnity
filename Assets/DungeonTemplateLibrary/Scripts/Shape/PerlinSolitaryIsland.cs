@@ -19,7 +19,7 @@ using DTL.Util;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Shape {
-    public sealed class PerlinSolitaryIsland : RectBasePerlinSolitary<PerlinSolitaryIsland>, IDrawer<int> {
+    public sealed class PerlinSolitaryIsland : RectBasePerlinSolitary<PerlinSolitaryIsland>, IDrawer<int>, ITerrainDrawer {
         private XorShift128 rand = new XorShift128();
 
         public bool Draw(int[,] matrix) {

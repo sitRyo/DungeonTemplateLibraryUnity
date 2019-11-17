@@ -28,7 +28,7 @@ using UnityEngine;
  */
 
 namespace DTL.Shape {
-    public sealed class FractalIsland : RectBaseFractal<FractalIsland>, IDrawer<int> {
+    public sealed class FractalIsland : RectBaseFractal<FractalIsland>, IDrawer<int>, ITerrainDrawer {
         private XorShift128 rand = new XorShift128();
 
         // fractal island の１チャンクの大きさ

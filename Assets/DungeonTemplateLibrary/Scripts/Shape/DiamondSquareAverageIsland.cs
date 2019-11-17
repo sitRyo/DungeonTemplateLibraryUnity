@@ -20,7 +20,7 @@ using DTL.Random;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 using UnityEngine;
 
-public class DiamondSquareAverageIsland : RectBaseFractal<DiamondSquareAverageIsland>, IDrawer<int> {
+public class DiamondSquareAverageIsland : RectBaseFractal<DiamondSquareAverageIsland>, IDrawer<int>, ITerrainDrawer {
     XorShift128 rand = new XorShift128();
 
     // のちのちUtilに入れるか...

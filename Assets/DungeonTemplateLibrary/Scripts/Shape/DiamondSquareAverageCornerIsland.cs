@@ -19,7 +19,7 @@ using DTL.Random;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Shape {
-    public class DiamondSquareAverageCornerIsland : RectBaseFractal<DiamondSquareAverageCornerIsland>, IDrawer<int> {
+    public class DiamondSquareAverageCornerIsland : RectBaseFractal<DiamondSquareAverageCornerIsland>, IDrawer<int>, ITerrainDrawer {
         XorShift128 rand = new XorShift128();
 
         // のちのちUtilに入れるか...

@@ -43,7 +43,8 @@ namespace DTL.Util {
 
         // Smoothどうするか？
         // 19/11/17 とりあえずいいかな...
-        // Todo smooth関数をDTL側で提供するか？
+        // Todo smooth関数をDTL側で提供するか？ 
+        // -> private関数に加えました。
         private void Generate() {
             matrix = new float[height, width];
             terrainGenerator.DrawNormalize(matrix);
@@ -122,7 +123,7 @@ namespace DTL.Util {
                 textureToHeight.Add(hValue + dh);
         }
 
-        private void Smooth(float[,] heightMap, int iterationNum) {
+        public void Smooth(float[,] heightMap, int iterationNum) {
             // Height = height
             // Width = width
             // 周囲のマスと自分の高さから平均化

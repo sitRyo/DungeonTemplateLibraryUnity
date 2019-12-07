@@ -22,7 +22,6 @@ public class GenerateBorder : MonoBehaviour {
     public int width = 15;
     public int drawValue = 5;
 
-	// Use this for initialization
 	void Start () {
         Border border = new Border(drawValue);
         var matrix = new int[height, width];

@@ -26,6 +26,11 @@ namespace DTL.Util {
             return (uint)matrix.GetLength(1);
         }
 
+        public static uint GetX<T>(T[,] matrix, int y_) {
+            var lengthY = MatrixUtil.GetY(matrix);
+            return y_ < lengthY ? MatrixUtil.GetX(matrix) : 0;
+        }
+
         public static uint GetY<T>(T[,] matrix) {
             return (uint)matrix.GetLength(0);
         }

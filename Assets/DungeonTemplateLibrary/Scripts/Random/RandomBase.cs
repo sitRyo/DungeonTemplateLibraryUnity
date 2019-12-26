@@ -18,7 +18,7 @@ namespace DTL.Random {
     // 渡せる乱数生成機はIRandomableをインタフェースとして持つクラス。その中にRNGCryptoServiceProviderも入れておけばよい
     // TODO IRandamableをインタフェースとして実装したRNGCryptoServiceProviderWrapperの実装
     // 一様分布生成や
-    public class RandomBase {
+    public class RandomBase : IRandomable {
         private IRandomable rand;
 
         public bool Probability(double p) {
@@ -39,6 +39,18 @@ namespace DTL.Random {
         // 整数xを[0, 1]に正規化する。
         private double Normalize(int x) {
             return (double) x / int.MaxValue;
+        }
+
+        public uint Next(uint min, uint max) {
+            return rand.Next(min, max);
+        }
+
+        public uint Next(uint max) {
+            return rand.Next(max);
+        }
+
+        public uint Next() {
+            return rand.Next();
         }
 
         /* Constructors */

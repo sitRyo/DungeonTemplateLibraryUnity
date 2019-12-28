@@ -16,7 +16,6 @@ using System;
 using UnityEngine;
 using DTL.Random;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
-using Pair = DTL.Util.Pair;
 
 namespace DTL.Util {
     public class VoronoiDiagram {
@@ -27,46 +26,31 @@ namespace DTL.Util {
         private uint width { get; set; }
         private uint height { get; set; }
         public int drawValue { get; set; }
-        public double probabilityValue { get; set; }
-        public int landValue { get; set; }
-        public int seaValue { get; set; }
 
-        /* Draw */
+        /* Draw */ 
 
-        /* 陸地かどうかを判定する。 */
-        bool isIsland(Pair point_, uint sx_, uint sy_, uint w_, uint h_, uint numerator_, uint denominator_) {
-            return (int) point_.First > ((w_ - sx_) * numerator_ / denominator_ + sx_) &&
-                   (int) point_.First < ((w_ - sx_) * (denominator_ - numerator_) / denominator_ + sx_) &&
-                   (int) point_.Second > ((h_ - sy_) * numerator_ / denominator_ + sy_) &&
-                   (int) point_.Second < ((h_ - sy_) * (denominator_ - numerator_) / denominator_ + sy_);
-        }
-
-        // boiler
-        public bool Draw(int[,] matrix) {
+        public bool Draw(int[,] matrix, DTLDelegate.VoronoiDiagramDelegate function_) {
             var lenX = MatrixUtil.GetX(matrix);
             var lenY = MatrixUtil.GetY(matrix);
-/*
-            var endX = (this.startX + this.width <= lenX) ? (uint)this.startX + this.width : lenX;
-            var endY = (this.startY + this.height <= lenY) ? (uint)this.startY + this.height : lenY;
-*/
 
             return this.DrawNormal(
                 matrix,
                 this.width == 0 || this.startX + this.width >= ((lenX == 0) ? 0 : lenX)
                     ? ((lenX == 0) ? 0 : lenX)
                     : this.startX + this.width,
-                (this.height == 0 || this.startY + this.height >= lenY) ? lenY : this.startY + this.height);
+                (this.height == 0 || this.startY + this.height >= lenY) ? lenY : this.startY + this.height,
+                function_);
         }
 
-        bool DrawNormal(int[,] matrix, uint endX, uint endY) {
-            this.assignSTL(matrix, endX, endY);
+        bool DrawNormal(int[,] matrix, uint endX, uint endY, DTLDelegate.VoronoiDiagramDelegate function_) {
+            this.assignSTL(matrix, endX, endY, function_);
             return true;
         }
 
-        private void assignSTL(int[,] matrix, uint endX, uint endY) {
+        private void assignSTL(int[,] matrix, uint endX, uint endY, DTLDelegate.VoronoiDiagramDelegate function_) {
             Pair[] point = new Pair[drawValue];
             int[] color = new int[drawValue];
-            CreatePoint(point, color, endX, endY);
+            CreatePoint(point, color, endX, endY, function_);
             CreateSites(point, color, matrix, endX, endY);
         }
 
@@ -99,29 +83,23 @@ namespace DTL.Util {
             return x * x + y * y;
         }
 
-        private void CreatePoint(Pair[] point, int[] color, uint w, uint h) {
+        private void CreatePoint(Pair[] point, int[] color, uint w, uint h,
+            DTLDelegate.VoronoiDiagramDelegate function_) {
             for (int arrayNum = 0; arrayNum < this.drawValue; ++arrayNum) {
-                point[arrayNum] = new Pair((int) rand.Next(w), (int) rand.Next(h));
-
-                if ((this.isIsland(point[arrayNum], startX, startY, w, h, 3, 5) ||
-                     this.isIsland(point[arrayNum], startX, startY, w, h, 1, 5)) &&
-                    rand.Probability(this.probabilityValue)) {
-                    color[arrayNum] = landValue;
-                }
-                else {
-                    color[arrayNum] = seaValue;
-                }
+                point[arrayNum] = new Pair((int)rand.Next(w), (int)rand.Next(h));
+                function_(ref point[arrayNum], ref color[arrayNum], startX, startY, w, h);
             }
         }
 
-
         /* Create Dungeon Matrix */
 
+        /*
         [ObsoleteAttribute("please use Draw Method", false)]
         public int[,] Create(int[,] matrix) {
             this.Draw(matrix);
             return matrix;
         }
+        */
 
         /* Clear */
 

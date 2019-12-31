@@ -89,6 +89,57 @@ namespace DTL.Range {
             return (TDerived)this;
         }
 
+        /* Getter */
+        public TDerived GetPointX(ref uint value) {
+            value = this.startX;
+            return (TDerived) this;
+        }
+
+        public TDerived GetPointY(ref uint value) {
+            value = this.startY;
+            return (TDerived) this;
+        }
+
+        public TDerived GetHeight(ref uint value) {
+            value = this.height;
+            return (TDerived) this;
+        }
+
+        public TDerived GetWidth(ref uint value) {
+            value = this.width;
+            return (TDerived) this;
+        }
+
+        public TDerived GetPoint(ref uint value, ref uint value2) {
+            value = this.startX;
+            value2 = this.startY;
+            return (TDerived) this;
+        }
+
+        public TDerived GetRange(ref uint value, ref uint value2, ref uint value3, ref uint value4) {
+            value = this.startX;
+            value2 = this.startY;
+            value3 = this.width;
+            value4 = this.height;
+            return (TDerived) this;
+        }
+
+        public uint GetPointX() {
+            return this.startX;
+        }
+
+        public uint GetPointY() {
+            return this.startY;
+        }
+
+        public uint GetWidth() {
+            return this.width;
+        }
+
+        public uint GetHeight() {
+            return this.height;
+        }
+
         /* Setter returns */
 
         public TDerived SetPointX(uint startX) {

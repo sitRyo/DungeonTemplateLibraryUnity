@@ -16,7 +16,7 @@ using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Range {
     public class RectBaseWithValue<TDerived> : BasicRect<RectBaseWithValue<TDerived>> where TDerived : RectBaseWithValue<TDerived> {
-        public int drawValue { get; set; }
+        public int drawValue { get; protected set; }
 
         public TDerived GetValue(ref int value) {
             value = (this.drawValue);
@@ -31,6 +31,12 @@ namespace DTL.Range {
         public TDerived Clear() {
             this.ClearRange();
             this.ClearValue();
+            return (TDerived) this;
+        }
+
+        /* Setter */
+        public TDerived SetValue(int drawValue) {
+            this.drawValue = drawValue;
             return (TDerived) this;
         }
 

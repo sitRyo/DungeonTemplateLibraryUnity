@@ -12,7 +12,6 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
-using System;
 using DTL.Range;
 using DTL.Shape;
 using DTL.Util;
@@ -22,14 +21,17 @@ using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 namespace DTL.Retouch {
 
     // マスを指定した数値で埋める
-    class CellularAutomaton : RectBase<CellularAutomaton>, IDrawer<int> {
+    public class CellularAutomaton : RectBase<CellularAutomaton>, IDrawer<int> {
 
-        XorShift128 rand = new XorShift128();
+        RandomBase rand = new RandomBase();
 
         public bool Draw(int[,] matrix) {
             return DrawNormal(matrix);
         }
 
+        /**
+         * Do CellAutomaton
+         */
         private void Assign(int[,] matrix, uint col, uint row) {
             if (matrix[row, col - 1] == matrix[row, col + 1] &&
                 matrix[row, col + 1] == matrix[row - 1, col] &&

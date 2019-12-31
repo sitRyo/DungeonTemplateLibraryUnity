@@ -18,23 +18,23 @@ namespace DTL.Range {
 
         public IList<int> drawValue { get; private set; }
 
-        TDerived GetValue(IList<int> value) {
+        public TDerived GetValue(IList<int> value) {
             value = this.drawValue;
             return (TDerived) this;
         }
         
-        TDerived ClearValue() {
+        public TDerived ClearValue() {
             this.drawValue.Clear();
             return (TDerived) this;
         }
 
-        TDerived Clear() {
+        public TDerived Clear() {
             this.ClearValue();
             this.ClearRange();
             return (TDerived) this;
         }
 
-        TDerived SetValue(IList<int> drawValue) {
+        public TDerived SetValue(IList<int> drawValue) {
             this.drawValue = drawValue;
             return (TDerived) this;
         }

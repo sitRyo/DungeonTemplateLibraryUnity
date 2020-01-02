@@ -43,15 +43,16 @@ namespace DTL.Base {
 
         // Check 'Value Equation'
         public bool Equals(Coordinate2DimensionalAndLength2Dimensional others) {
-            if (others == null || !this.GetType().Equals(others.GetType())) {
+            if (others == null) 
                 return false;
-            }
-
-            return (x.Equals(others.x) && y.Equals(others.y) && w.Equals(others.w) && h.Equals(others.h));
+        
+            return (this.x.Equals(others.x) && this.y.Equals(others.y) && this.w.Equals(others.w) && this.h.Equals(others.h));
         }
 
-        public override bool Equals(Object obj) {
-            return this.Equals(obj);
+        public override bool Equals(System.Object obj) {
+            Coordinate2DimensionalAndLength2Dimensional coord2d = obj as Coordinate2DimensionalAndLength2Dimensional;
+            if (coord2d == null) return false;
+            return this.Equals(coord2d);
         }
 
         public int CompareTo(Coordinate2DimensionalAndLength2Dimensional other) {
@@ -60,32 +61,37 @@ namespace DTL.Base {
 
         public static bool operator ==(Coordinate2DimensionalAndLength2Dimensional lhs,
             Coordinate2DimensionalAndLength2Dimensional rhs) {
-            return lhs != null && lhs.Equals(rhs);
+            if((System.Object) lhs == null && (System.Object) rhs == null) 
+                return System.Object.Equals(lhs, rhs);
+
+            return lhs.Equals(rhs);
         }
 
         public static bool operator !=(Coordinate2DimensionalAndLength2Dimensional lhs,
             Coordinate2DimensionalAndLength2Dimensional rhs) {
-            return lhs != null && !lhs.Equals(rhs);
+            if((System.Object) lhs == null && (System.Object) rhs == null) 
+                return System.Object.Equals(lhs, rhs);
+            return (System.Object) lhs != null && !lhs.Equals(rhs);
         }
 
         public static bool operator >(Coordinate2DimensionalAndLength2Dimensional lhs,
             Coordinate2DimensionalAndLength2Dimensional rhs) {
-            return lhs != null && rhs != null && lhs.CompareTo(rhs) > 0;
+            return (System.Object) lhs != null && (System.Object) rhs != null && lhs.CompareTo(rhs) > 0;
         }
 
         public static bool operator <(Coordinate2DimensionalAndLength2Dimensional lhs,
             Coordinate2DimensionalAndLength2Dimensional rhs) {
-            return lhs != null && rhs != null && lhs.CompareTo(rhs) < 0;
+            return (System.Object) lhs != null && (System.Object) rhs != null && lhs.CompareTo(rhs) < 0;
         }
 
         public static bool operator >=(Coordinate2DimensionalAndLength2Dimensional lhs,
             Coordinate2DimensionalAndLength2Dimensional rhs) {
-            return lhs != null && rhs != null && lhs.CompareTo(rhs) >= 0;
+            return (System.Object) lhs != null && (System.Object) rhs != null && lhs.CompareTo(rhs) >= 0;
         }
 
         public static bool operator <=(Coordinate2DimensionalAndLength2Dimensional lhs,
             Coordinate2DimensionalAndLength2Dimensional rhs) {
-            return lhs != null && rhs != null && lhs.CompareTo(rhs) <= 0;
+            return (System.Object) lhs != null && (System.Object) rhs != null && lhs.CompareTo(rhs) <= 0;
         }
 
     }

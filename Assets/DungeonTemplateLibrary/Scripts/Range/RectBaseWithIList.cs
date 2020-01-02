@@ -16,7 +16,7 @@ namespace DTL.Range {
     public class RectBaseWithIList<TDerived> : 
         BasicRect<RectBaseWithIList<TDerived>> where TDerived : RectBaseWithIList<TDerived> {
 
-        public IList<int> drawValue { get; private set; }
+        public IList<int> drawValue { get; protected set; }
 
         public TDerived GetValue(IList<int> value) {
             value = this.drawValue;

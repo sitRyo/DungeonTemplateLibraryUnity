@@ -16,9 +16,34 @@ using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Range {
     public class RectBaseFractal<TDerived> : BasicRect<RectBaseFractal<TDerived>> where TDerived : RectBaseFractal<TDerived> {
-        public int minValue { get; set; }
-        public int altitude { get; set; }
-        public int addAltitude { get; set; }
+        public int minValue { get; protected set; }
+        public int altitude { get; protected set; }
+        public int addAltitude { get; protected set; }
+
+        /* Getter */
+        public int GetValue() {
+            return this.altitude;
+        }
+
+        public int GetMinValue() {
+            return this.minValue;
+        }
+
+        public int GetAddAltitude() {
+            return this.addAltitude;
+        }
+
+        public int GetAltitude() {
+            return this.altitude;
+        }
+
+        /* Setter */
+        public TDerived SetValue(int value) {
+            this.altitude = value;
+            return (TDerived) this;
+        }
+
+        // AddAlititude, MinValueのSetterはなくて良いのか？
 
         /* Clear */
 

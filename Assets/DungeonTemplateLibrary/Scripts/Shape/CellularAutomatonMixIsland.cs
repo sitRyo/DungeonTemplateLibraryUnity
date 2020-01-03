@@ -33,7 +33,10 @@ namespace DTL.Shape {
 
         /* Create Dungeon Matrix ダンジョン行列生成  */
 
-        // TODO!! 
+        public int[,] Create(int[,] matrix) {
+            this.Draw(matrix);
+            return matrix;
+        }
 
         /* Getter */
 
@@ -52,6 +55,11 @@ namespace DTL.Shape {
         public uint Getheight() {
             return this.border.GetHeight();
         }
+
+// Todo GetValue()
+/*        public uint GetValue() {
+            return this.border.GetValue();
+        }*/
 
         /* Setter */
 

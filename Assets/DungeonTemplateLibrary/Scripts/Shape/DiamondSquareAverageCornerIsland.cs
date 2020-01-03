@@ -35,6 +35,11 @@ namespace DTL.Shape {
             return DrawNormal(matrix);
         }
 
+        public int[,] Create(int[,] matrix) {
+            Draw(matrix);
+            return matrix;
+        }
+
         private bool DrawNormal(int[,] matrix) {
             if (this.altitude < 2) return false;
             return (this.width == 0)

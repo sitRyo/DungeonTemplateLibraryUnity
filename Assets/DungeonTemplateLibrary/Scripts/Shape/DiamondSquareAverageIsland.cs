@@ -36,6 +36,11 @@ public class DiamondSquareAverageIsland : RectBaseFractal<DiamondSquareAverageIs
         return DrawNormal(matrix);
     }
 
+    public int[,] Create(int[,] matrix) {
+        this.Draw(matrix);
+        return matrix;
+    }
+
     private bool DrawNormal(int[,] matrix) {
         if (this.altitude < 2) return false;
         return (this.width == 0)

@@ -22,6 +22,11 @@ namespace DTL.Shape {
             return DrawNormal(matrix);
         }
 
+        public int[,] Create(int[,] matrix) {
+            Draw(matrix);
+            return matrix;
+        }
+
         public bool DrawNormal(int[,] matrix) {
             var endX = this.CalcEndX(MatrixUtil.GetX(matrix));
             var endY = this.CalcEndY(MatrixUtil.GetY(matrix));

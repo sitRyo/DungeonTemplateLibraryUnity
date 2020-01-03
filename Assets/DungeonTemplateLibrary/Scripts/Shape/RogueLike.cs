@@ -63,6 +63,11 @@ namespace DTL.Shape {
             return startX >= MatrixUtil.GetX(matrix) || startY >= MatrixUtil.GetY(matrix) ? false : DrawNormal(matrix);
         }
 
+        public int[,] Create(int[,] matrix) {
+            this.Draw(matrix);
+            return matrix;
+        }
+
         /* 基本処理 */
         bool DrawNormal(int[,] matrix) {
             if (this.roomRange.w < 1 || this.roomRange.h < 1 || this.wayRange.w < 1 || this.wayRange.h < 1)

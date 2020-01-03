@@ -22,6 +22,11 @@ namespace DTL.Shape {
             return DrawNormal(matrix);
         }
 
+        public int[,] Create(int[,] matrix) {
+            this.Draw(matrix);
+            return matrix;
+        }
+        
         private bool DrawNormal(int[,] matrix) {
             var value = this.drawValue;
             var endX = this.CalcEndX(MatrixUtil.GetX(matrix));
@@ -32,6 +37,7 @@ namespace DTL.Shape {
 
             return true;
         }
+
 
         public AscendingOrder() { } // = default();
 

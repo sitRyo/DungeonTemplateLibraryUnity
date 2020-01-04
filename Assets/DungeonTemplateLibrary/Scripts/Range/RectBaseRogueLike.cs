@@ -18,13 +18,13 @@ using DTL.Util;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Range {
-
     /*#######################################################################################
         [概要] "dtl名前空間"とは"DungeonTemplateLibrary"の全ての機能が含まれる名前空間である。
         [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
     #######################################################################################*/
 
-    public class RectBaseRogueLike<TDerived> : BasicRect<RectBaseRogueLike<TDerived>> where TDerived : RectBaseRogueLike<TDerived> {
+    public class RectBaseRogueLike<TDerived> : BasicRect<RectBaseRogueLike<TDerived>>
+        where TDerived : RectBaseRogueLike<TDerived> {
         public RogueLikeList rogueLikeList { get; protected set; }
         public uint maxWay { get; protected set; } = 20;
         protected MatrixRange roomRange = new MatrixRange(3, 3, 3, 3);
@@ -33,43 +33,43 @@ namespace DTL.Range {
         /* Get Member Value */
 
         public int outsideWall {
-            get => this.rogueLikeList.outsideWallId;
-            protected set;
+            get { return this.rogueLikeList.outsideWallId; }
+            protected set { this.rogueLikeList.outsideWallId = value; }
         }
 
         public int insideWall {
-            get => this.rogueLikeList.insideWallId;
-            protected set;
+            get { return this.rogueLikeList.insideWallId; }
+            protected set { this.rogueLikeList.insideWallId = value; }
         }
 
         public int room {
-            get => this.rogueLikeList.roomId;
-            protected set;
+            get { return this.rogueLikeList.insideWallId; }
+            protected set { this.rogueLikeList.roomId = value; }
         }
 
         public int entrance {
-            get => this.rogueLikeList.entranceId;
-            protected set;
+            get { return this.rogueLikeList.entranceId; }
+            protected set { this.rogueLikeList.entranceId = value; }
         }
 
         public int way {
-            get => this.rogueLikeList.wayId;
-            protected set;
+            get { return this.rogueLikeList.wayId; }
+            protected set { this.rogueLikeList.wayId = value; }
         }
 
         public int wall {
-            get => this.rogueLikeList.outsideWallId;
-            protected set;
+            get { return this.rogueLikeList.outsideWallId; }
+            protected set { this.rogueLikeList.outsideWallId = value; }
         }
 
         /* for method chaining */
 
         public TDerived GetOutsideWall(ref int value) {
-            value = this.outSideWall;
+            value = this.outsideWall;
             return (TDerived) this;
         }
 
-        public TDerived GetinsideWall(ref int value) {
+        public TDerived GetInsideWall(ref int value) {
             value = this.insideWall;
             return (TDerived) this;
         }
@@ -94,7 +94,7 @@ namespace DTL.Range {
             return (TDerived) this;
         }
 
-        public TDerived GetMaxWay(ref int value) {
+        public TDerived GetMaxWay(ref uint value) {
             value = this.maxWay;
             return (TDerived) this;
         }
@@ -104,11 +104,11 @@ namespace DTL.Range {
         }
 
         public TDerived SetOutsideWall(ref int value) {
-            this.outSideWall = value;
+            this.outsideWall = value;
             return (TDerived) this;
         }
 
-        public TDerived SetinsideWall(ref int value) {
+        public TDerived SetInsideWall(ref int value) {
             this.insideWall = value;
             return (TDerived) this;
         }
@@ -133,52 +133,52 @@ namespace DTL.Range {
             return (TDerived) this;
         }
 
-        public TDerived SetMaxWay(ref int value) {
+        public TDerived SetMaxWay(ref uint value) {
             this.maxWay = value;
             return (TDerived) this;
         }
 
-        public TDerived SetRogueLikeList(RogueLikeList rogueLikeList) {
-            rogueLikeList = this.rogueLikeList;
+        public TDerived SetValue(RogueLikeList rogueLikeList) {
+            this.rogueLikeList = rogueLikeList;
             return (TDerived) this;
         }
 
         /* Clear */
         public TDerived ClearOutsideWall() {
             this.rogueLikeList.outsideWallId = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearInsideWall() {
             this.rogueLikeList.insideWallId = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearRoom() {
             this.rogueLikeList.roomId = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearEntrance() {
             this.rogueLikeList.entranceId = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearWall() {
             ClearInsideWall();
             ClearOutsideWall();
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearMaxWay() {
             this.maxWay = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearValue() {
             this.rogueLikeList = new RogueLikeList();
             ClearMaxWay();
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived Clear() {
@@ -189,11 +189,15 @@ namespace DTL.Range {
 
         /* Constructors */
 
-        public RectBaseRogueLike() { } // = default();
+        public RectBaseRogueLike() {
+        } // = default();
 
-        public RectBaseRogueLike(MatrixRange matrixRange) : base(matrixRange) { }
+        public RectBaseRogueLike(MatrixRange matrixRange) : base(matrixRange) {
+        }
 
-        public RectBaseRogueLike(uint startX, uint startY, uint width, uint height) : base(startX, startY, width, height) { }
+        public RectBaseRogueLike(uint startX, uint startY, uint width, uint height) : base(startX, startY, width,
+            height) {
+        }
 
         public RectBaseRogueLike(RogueLikeList drawValue) {
             this.rogueLikeList = drawValue;
@@ -221,19 +225,22 @@ namespace DTL.Range {
             this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
         }
 
-        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay) {
+        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId,
+            uint maxWay) {
             this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
             this.maxWay = maxWay;
         }
 
 
-        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay, MatrixRange roomRange) {
+        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId,
+            uint maxWay, MatrixRange roomRange) {
             this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
             this.maxWay = maxWay;
             this.roomRange = roomRange;
         }
 
-        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId, uint maxWay, MatrixRange roomRange, MatrixRange wayRange) {
+        public RectBaseRogueLike(int outsideWallId, int insideWallId, int roomId, int entranceId, int wayId,
+            uint maxWay, MatrixRange roomRange, MatrixRange wayRange) {
             this.rogueLikeList = new RogueLikeList(outsideWallId, insideWallId, roomId, entranceId, wayId);
             this.maxWay = maxWay;
             this.roomRange = roomRange;
@@ -245,13 +252,15 @@ namespace DTL.Range {
             this.maxWay = maxWay;
         }
 
-        public RectBaseRogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange) : base(matrixRange) {
+        public RectBaseRogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange) :
+            base(matrixRange) {
             this.rogueLikeList = drawValue;
             this.roomRange = roomRange;
             this.maxWay = maxWay;
         }
 
-        public RectBaseRogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange, MatrixRange wayRange) : base(matrixRange) {
+        public RectBaseRogueLike(MatrixRange matrixRange, RogueLikeList drawValue, uint maxWay, MatrixRange roomRange,
+            MatrixRange wayRange) : base(matrixRange) {
             this.rogueLikeList = drawValue;
             this.roomRange = roomRange;
             this.wayRange = wayRange;
@@ -279,5 +288,4 @@ namespace DTL.Range {
             this.wayRange = wayRange;
         }
     }
-
 }

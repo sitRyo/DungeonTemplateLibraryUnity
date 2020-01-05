@@ -20,8 +20,7 @@ using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 // 1bitの値を詰め込んだ行列を生成する生成器
 namespace DTL.Shape {
     public class RandomRect : IDrawer<int> {
-        private XorShift128 rand = new XorShift128();
-        private RandomBase randBase;
+        private RandomBase randBase = new RandomBase();
 
         public uint startX { get; set; }
         public uint startY { get; set; }
@@ -30,12 +29,7 @@ namespace DTL.Shape {
         public int drawValue { get; set; }
         private double probabilityValue = 0.5;
 
-        private void Init() {
-            randBase = new RandomBase(rand);
-        }
-
-        public bool Draw(int[,] matrix) {
-            Init();
+        public bool Draw(int[,] matrix) { 
             return (this.width == 0)
                 ? this.DrawSTL(matrix,
                     (this.height == 0 || this.startY + this.height >= MatrixUtil.GetY(matrix))
@@ -48,7 +42,6 @@ namespace DTL.Shape {
         }
 
         public bool DrawOperator(int[,] matrix, Func<int, bool> func) {
-            Init();
             return (this.width == 0)
                 ? this.DrawSTL(matrix,
                     (this.height == 0 || this.startY + this.height >= MatrixUtil.GetY(matrix))

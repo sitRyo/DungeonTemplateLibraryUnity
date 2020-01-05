@@ -53,6 +53,16 @@ namespace DTL.Shape {
                         : this.startY + this.height, func);
         }
 
+        public int[,] Create(int[,] matrix) {
+            this.Draw(matrix);
+            return matrix;
+        }
+
+        public int[,] Create(int[,] matrix, Func<int, bool> func) {
+            this.DrawOperator(matrix, func);
+            return matrix;
+        }
+
         private bool DrawSTL(int[,] matrix, uint endY) {
             for (var row = this.startY; row < endY; ++row)
             for (var col = this.startX; col < MatrixUtil.GetX(matrix, (int)row); ++col)

@@ -49,7 +49,7 @@ namespace DTL.Random {
 
         // Generate random number between [min, max). Note! max >= min
         public uint Next(uint min, uint max) {
-            if (max == 0) return 0;
+            if (max == 0 || max - min == 0) return 0;
             return min + Next() % (max - min);
         }
 

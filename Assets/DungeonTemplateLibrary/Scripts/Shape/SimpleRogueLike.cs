@@ -27,9 +27,9 @@ namespace DTL.Shape {
         [Summary] The "dtl" is a namespace that contains all the functions of "DungeonTemplateLibrary".
     #######################################################################################*/
 
-    public sealed class SimpleRogueLike : DTL.Range.RectBaseSimpleRogueLike<SimpleRogueLike> {
+    public class SimpleRogueLike : DTL.Range.RectBaseSimpleRogueLike<SimpleRogueLike>, IDrawer<int> {
 
-        private DTLRandom rand = new DTLRandom();
+        private RandomBase rand = new RandomBase();
 
         private const int RL_COUNT_X = 0;
         private const int RL_COUNT_Y = 1;
@@ -39,7 +39,7 @@ namespace DTL.Shape {
         // Normal
         private bool DrawNormal(int[,] matrix_, uint endX_, uint endY_) {
             // マップの区分け数（部屋の個数）0~nまでの部屋ID
-            var mapDivCount = divisionMin + (uint)rand.Next((int)divisionRandMax);
+            var mapDivCount = divisionMin + rand.Next(divisionRandMax);
 
             // マップの区域 [部屋ID][X終点 , Y終点 , X始点 , Y始点]
             var dungeonDivision = new uint[mapDivCount, 4];
@@ -70,7 +70,7 @@ namespace DTL.Shape {
 
             for (int i = 1; i < mapDivCount; ++i) {
                 // 今まで作った区分けをランダムに指定(指定した区域をさらに区分けする)
-                divisionAfter = (uint)rand.Next(i);
+                divisionAfter = rand.Next((uint)i);
 
                 // 指定した区域のXとYの長さによって、分割する向きを決める(長い方を分割する)
                 if (dungeonDivision[divisionAfter, 0] - dungeonDivision[divisionAfter, 2] >
@@ -127,7 +127,7 @@ namespace DTL.Shape {
                 dungeonRoom[i, 3] = dungeonDivision[i, 3];
 
                 // X座標の部屋の長さを指定
-                dungeonRoom[i, 0] = dungeonDivision[i, 2] + roomMinY + (uint)rand.Next((int)roomRandMaxX);
+                dungeonRoom[i, 0] = dungeonDivision[i, 2] + roomMinY + rand.Next(roomRandMaxX);
 
                 if (dungeonDivision[i, 0] - dungeonDivision[i, 2] < dungeonRoom[i, 0] - dungeonRoom[i, 2] + 5) {
                     dungeonRoom[i, 0] = dungeonDivision[i, 0] - 4;
@@ -137,7 +137,7 @@ namespace DTL.Shape {
                 }
 
                 // Y座標の部屋の長さを指定
-                dungeonRoom[i, 1] = dungeonDivision[i, 3] + roomMinX + (uint)rand.Next((int)roomRandMaxY);
+                dungeonRoom[i, 1] = dungeonDivision[i, 3] + roomMinX + rand.Next(roomRandMaxY);
 
                 if (dungeonDivision[i, 1] - dungeonDivision[i, 3] < dungeonRoom[i, 1] - dungeonRoom[i, 3] + 5) {
                     dungeonRoom[i, 1] = dungeonDivision[i, 1] - 4;
@@ -152,8 +152,8 @@ namespace DTL.Shape {
                 }
 
 
-                uint l = dungeonDivision[i, 0] - dungeonRoom[i, 0] - 5 == 0 ? 2 : (uint)rand.Next(1, (dungeonDivision[i, 0] - dungeonRoom[i, 0]) - 5) + 2;
-                uint n = dungeonDivision[i, 1] - dungeonRoom[i, 1] - 5 == 0 ? 2 : (uint)rand.Next(1, (dungeonDivision[i, 1] - dungeonRoom[i, 1]) - 5) + 2;
+                uint l = dungeonDivision[i, 0] - dungeonRoom[i, 0] - 5 == 0 ? 2 : rand.Next(1, (dungeonDivision[i, 0] - dungeonRoom[i, 0]) - 5) + 2;
+                uint n = dungeonDivision[i, 1] - dungeonRoom[i, 1] - 5 == 0 ? 2 : rand.Next(1, (dungeonDivision[i, 1] - dungeonRoom[i, 1]) - 5) + 2;
 
                 dungeonRoom[i, 0] += l;
                 dungeonRoom[i, 2] += l;
@@ -219,6 +219,11 @@ namespace DTL.Shape {
                 matrix_,
                 (width == 0 || startX + width >= (matrix_.Length == 0 ? 0 : (uint)(matrix_.Length / matrix_.GetLength(0)))) ? (uint)(matrix_.Length / matrix_.GetLength(0)) : startX + width,
                 (height == 0 || startY + height >= matrix_.GetLength(0)) ? (uint)(matrix_.Length == 0 ? 0 : matrix_.GetLength(0)) : startY + height);
+        }
+
+        public int[,] Create(int[,] matrix) {
+            this.Draw(matrix);
+            return matrix;
         }
 
         /* Constructors */

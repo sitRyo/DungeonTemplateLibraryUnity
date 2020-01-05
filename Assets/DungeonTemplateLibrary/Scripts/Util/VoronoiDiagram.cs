@@ -21,10 +21,10 @@ namespace DTL.Util {
     public class VoronoiDiagram {
         RandomBase rand = new RandomBase();
 
-        private uint startX { get; set; }
-        private uint startY { get; set; }
-        private uint width { get; set; }
-        private uint height { get; set; }
+        public uint startX { get; set; }
+        public uint startY { get; set; }
+        public uint width { get; set; }
+        public uint height { get; set; }
         public int drawValue { get; set; }
 
         /* Draw */ 

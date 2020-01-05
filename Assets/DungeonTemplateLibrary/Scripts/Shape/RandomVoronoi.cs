@@ -17,13 +17,13 @@ using DTL.Util;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Shape {
-    public class RandomVoronoi {
+    public class RandomVoronoi : IDrawer<int> {
         private RandomBase rand = new RandomBase();
         private VoronoiDiagram voronoiDiagram;
         public double probabilityValue { get; set; }
         public int trueColor { get; set; }
         public int falseColor { get; set; }
-        
+
         public bool Draw(int[,] matrix) {
             DTLDelegate.VoronoiDiagramDelegate voronoiDiagramDelegate =
                 (ref Pair point, ref int color, uint startX, uint startY, uint w, uint h) => {
@@ -41,6 +41,77 @@ namespace DTL.Shape {
             this.Draw(matrix);
             return matrix;
         }
+
+        /* Getter */
+        public uint GetPointX() {
+            return voronoiDiagram.startX;
+        }
+
+        public uint GetPointY() {
+            return voronoiDiagram.startY;
+        }
+
+        public uint GetWidth() {
+            return voronoiDiagram.width;
+        }
+
+        public uint GetHeight() {
+            return voronoiDiagram.height;
+        }
+
+        public int GetValue() {
+            return voronoiDiagram.drawValue;
+        }
+
+        /* Setter */
+        public RandomVoronoi SetPointX(uint value) {
+            this.voronoiDiagram.startX = value;
+            return this;
+        }
+
+        public RandomVoronoi SetPointY(uint value) {
+            voronoiDiagram.startY = value;
+            return this;
+        }
+
+        public RandomVoronoi SetWidth(uint value) {
+            voronoiDiagram.width = value;
+            return this;
+        }
+
+        public RandomVoronoi SetHeight(uint value) {
+            voronoiDiagram.height = value;
+            return this;
+        }
+
+        public RandomVoronoi SetPoint(uint value) {
+            voronoiDiagram.startX = value;
+            voronoiDiagram.startY = value;
+            return this;
+        }
+
+        public RandomVoronoi SetPoint(uint startX, uint startY) {
+            voronoiDiagram.startX = startX;
+            voronoiDiagram.startY = startY;
+            return this;
+        }
+
+        public RandomVoronoi SetRange(uint startX, uint startY, uint width, uint height) {
+            voronoiDiagram.startX = startX;
+            voronoiDiagram.startY = startY;
+            voronoiDiagram.width = width;
+            voronoiDiagram.height = height;
+            return this;
+        }
+
+        public RandomVoronoi SetRange(MatrixRange matrixRange) {
+            voronoiDiagram.startX = (uint) matrixRange.x;
+            voronoiDiagram.startY = (uint) matrixRange.y;
+            voronoiDiagram.width = (uint) matrixRange.w;
+            voronoiDiagram.height = (uint) matrixRange.h;
+            return this;
+        }
+
 
         /* Clear */
 
@@ -136,7 +207,8 @@ namespace DTL.Shape {
             this.trueColor = trueColor;
         }
 
-        public RandomVoronoi(MatrixRange matrixRange, int drawValue, double probabilityValue, int trueColor, int falseColor) {
+        public RandomVoronoi(MatrixRange matrixRange, int drawValue, double probabilityValue, int trueColor,
+            int falseColor) {
             voronoiDiagram = new VoronoiDiagram(matrixRange, drawValue);
             this.probabilityValue = probabilityValue;
             this.trueColor = trueColor;

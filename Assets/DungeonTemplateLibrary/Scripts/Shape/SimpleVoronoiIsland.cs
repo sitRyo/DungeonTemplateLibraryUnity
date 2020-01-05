@@ -53,6 +53,77 @@ namespace DTL.Shape {
             return matrix;
         }
 
+        /* Getter */
+        public uint GetPointX() {
+            return voronoiDiagram.startX;
+        }
+
+        public uint GetPointY() {
+            return voronoiDiagram.startY;
+        }
+
+        public uint GetWidth() {
+            return voronoiDiagram.width;
+        }
+
+        public uint GetHeight() {
+            return voronoiDiagram.height;
+        }
+
+        public int GetValue() {
+            return voronoiDiagram.drawValue;
+        }
+
+        /* Setter */
+        public SimpleVoronoiIsland SetPointX(uint value) {
+            this.voronoiDiagram.startX = value;
+            return this;
+        }
+
+        public SimpleVoronoiIsland SetPointY(uint value) {
+            voronoiDiagram.startY = value;
+            return this;
+        }
+
+        public SimpleVoronoiIsland SetWidth(uint value) {
+            voronoiDiagram.width = value;
+            return this;
+        }
+
+        public SimpleVoronoiIsland SetHeight(uint value) {
+            voronoiDiagram.height = value;
+            return this;
+        }
+
+        public SimpleVoronoiIsland SetPoint(uint value) {
+            voronoiDiagram.startX = value;
+            voronoiDiagram.startY = value;
+            return this;
+        }
+
+        public SimpleVoronoiIsland SetPoint(uint startX, uint startY) {
+            voronoiDiagram.startX = startX;
+            voronoiDiagram.startY = startY;
+            return this;
+        }
+
+        public SimpleVoronoiIsland SetRange(uint startX, uint startY, uint width, uint height) {
+            voronoiDiagram.startX = startX;
+            voronoiDiagram.startY = startY;
+            voronoiDiagram.width = width;
+            voronoiDiagram.height = height;
+            return this;
+        }
+
+        public SimpleVoronoiIsland SetRange(MatrixRange matrixRange) {
+            voronoiDiagram.startX = (uint)matrixRange.x;
+            voronoiDiagram.startY = (uint)matrixRange.y;
+            voronoiDiagram.width = (uint)matrixRange.w;
+            voronoiDiagram.height = (uint)matrixRange.h;
+            return this;
+        }
+
+
         /* Clear */
         SimpleVoronoiIsland ClearPointX() {
             this.voronoiDiagram.ClearPointX();

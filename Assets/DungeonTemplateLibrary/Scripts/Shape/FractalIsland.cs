@@ -54,6 +54,11 @@ namespace DTL.Shape {
             return true;
         }
 
+        public int[,] Create(int[,] matrix) {
+            this.Draw(matrix);
+            return matrix;
+        }
+
         private void Normalize(int[,] matrix, float[,] retMatrix) {
             var maxHeight = MatrixUtil.GetMax(matrix);
 

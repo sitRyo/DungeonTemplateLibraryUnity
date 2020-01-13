@@ -13,8 +13,10 @@
 #######################################################################################*/
 
 using System;
+using System.Collections.Specialized;
 using DTL.Random;
 using DTL.Util;
+using UnityEngine;
 
 namespace DTL.Util {
     // PerlinNoise Utilities. Expect double or float.
@@ -178,10 +180,16 @@ namespace DTL.Util {
             for (int i = 0; i < 256; ++i) {
                 this.p[256 + i] = this.p[i];
             }
+
+            for (int i = 0; i < 10; ++i) {
+                Debug.Log(p[i]);
+            }
         }
 
         /* Constructor */
         public PerlinNoise() {
+            this.rand = new XorShift128();
+            SetSeed(rand.Next());
         } // = default();
 
         public PerlinNoise(int seed) {

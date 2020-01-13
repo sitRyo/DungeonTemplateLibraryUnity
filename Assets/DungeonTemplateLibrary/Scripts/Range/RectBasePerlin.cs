@@ -19,10 +19,59 @@ using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 namespace DTL.Range {
     public class RectBasePerlin<TDerived> : BasicRect<RectBasePerlin<TDerived>>
         where TDerived : RectBasePerlin<TDerived> {
-        public double frequency { get; set; }
-        public uint octaves { get; set; }
-        public int minHeight { get; set; }
-        public int maxHeight { get; set; }
+        public double frequency { get; protected set; }
+        public uint octaves { get; protected set; }
+        public int minHeight { get; protected set; }
+        public int maxHeight { get; protected set; }
+
+        /* Getter */
+
+        public double GetFrequency() {
+            return this.frequency;
+        }
+
+        public double GetOctaves() {
+            return this.octaves;
+        }
+
+        public int GetMinHeight() {
+            return this.minHeight;
+        }
+
+        public int GetMaxHeight() {
+            return this.maxHeight;
+        }
+
+        public double GetValue() {
+            return this.frequency;
+        }
+
+        /* Setter */
+
+        public TDerived SetValue(double frequency) {
+            this.frequency = frequency;
+            return (TDerived) this;
+        }
+
+        public TDerived SetFrequency(double frequency) {
+            this.frequency = frequency;
+            return (TDerived) this;
+        }
+
+        public TDerived SetOctaves(uint octaves) {
+            this.octaves = octaves;
+            return (TDerived) this;
+        }
+
+        public TDerived SetMinHeight(int minHeight) {
+            this.minHeight = minHeight;
+            return (TDerived) this;
+        }
+
+        public TDerived SetMaxHeight(int maxHeight) {
+            this.maxHeight = maxHeight;
+            return (TDerived) this;
+        }
 
         /* clear */
         public TDerived ClearValue() {

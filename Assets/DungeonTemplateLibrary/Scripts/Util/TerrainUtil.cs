@@ -27,10 +27,10 @@ namespace DTL.Util {
         public int width { get; set; }
         public int height { get; set; }
         public float[,] matrix { get; private set; }
+        public uint smooth { get; set; }
 
         private List<Texture2D> texture2D;
         private ITerrainDrawer terrainGenerator;
-
 
         public void Draw() {
             Generate();
@@ -40,13 +40,9 @@ namespace DTL.Util {
             terrainData.SetAlphamaps(0, 0, textureMap);
         }
 
-
-        // Smoothどうするか？
-        // 19/11/17 とりあえずいいかな...
-        // Todo smooth関数をDTL側で提供するか？ 
-        // -> private関数に加えました。
         private void Generate() {
             matrix = new float[height, width];
+            Smooth(matrix, smooth);
             terrainGenerator.DrawNormalize(matrix);
         }
 
@@ -114,16 +110,21 @@ namespace DTL.Util {
         // 最初にheightMapとテクスチャの関係が指定されなかったときに呼ばれる関数
         private void SetTextureToHeight() {
             var len = this.texture2D.Count;
+            Debug.Log(len);
             this.textureToHeight = new List<float>();
             var hValue = 0.0f;
             var dh = (float) 1.0f / len;
 
             this.textureToHeight.Add(hValue);
             for (int i = 1; i < len; ++i)
-                textureToHeight.Add(hValue + dh);
+                textureToHeight.Add(hValue + i*dh);
+
+            foreach (var a in textureToHeight) {
+                Debug.Log(a);
+            }
         }
 
-        public void Smooth(float[,] heightMap, int iterationNum) {
+        public void Smooth(float[,] heightMap, uint iterationNum) {
             // Height = height
             // Width = width
             // 周囲のマスと自分の高さから平均化
@@ -149,7 +150,7 @@ namespace DTL.Util {
                         // 自分を足す
                         cumulativeValue += heightMap[h, w];
                         ++cumulative;
-                        //                    Debug.Log(cumulativeValue);
+
                         heightMap[h, w] = (float)cumulativeValue / cumulative;
                     }
                 }
@@ -157,7 +158,7 @@ namespace DTL.Util {
         }
 
         public TerrainUtil(Terrain terrain, List<Texture2D> texture2D, ITerrainDrawer terrainGenerator,
-            int height, int width, int depth) {
+            int height, int width, int depth, uint smooth = 0) {
             this.terrain = terrain;
             this.texture2D = texture2D;
             this.terrainGenerator = terrainGenerator;
@@ -165,11 +166,12 @@ namespace DTL.Util {
             this.height = height;
             this.width = width;
             this.depth = depth;
+            this.smooth = smooth;
             SetTextureToHeight();
         }
 
         public TerrainUtil(Terrain terrain, List<Texture2D> texture2D, ITerrainDrawer terrainGenerator,
-            int height, int width, int depth, List<float> textureToHeight) {
+            int height, int width, int depth, List<float> textureToHeight, uint smooth = 0) {
             this.terrain = terrain;
             this.texture2D = texture2D;
             this.terrainGenerator = terrainGenerator;
@@ -178,6 +180,7 @@ namespace DTL.Util {
             this.height = height;
             this.width = width;
             this.depth = depth;
+            this.smooth = smooth;
         }
     }
 }

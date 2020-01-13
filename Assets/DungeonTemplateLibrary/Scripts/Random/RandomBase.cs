@@ -17,7 +17,7 @@ namespace DTL.Random {
     // => RNGCryptoServiceProviderを使うことによる計算コストや他の副作用が考えられないため、今回は乱数発生機をジェネリックとして渡すことにする。
     // 渡せる乱数生成機はIRandomableをインタフェースとして持つクラス。その中にRNGCryptoServiceProviderも入れておけばよい
     // TODO IRandamableをインタフェースとして実装したRNGCryptoServiceProviderWrapperの実装
-    // 一様分布生成や
+
     public class RandomBase : IRandomable {
         private IRandomable rand;
 

@@ -16,15 +16,14 @@ using System;
 using UnityEngine;
 
 namespace DTL.Random {
-
     /* Xorshift: generates random numbers */
     public class XorShift128 : IRandomable {
         private System.Random rand;
 
-        private uint x = 31419265;
-        private uint y = 358979323;
-        private uint z = 846264338;
-        private uint w;
+        private uint x = 123456789;
+        private uint y = 362436069;
+        private uint z = 521288629;
+        private uint w = 88675123;
 
         public uint Min() {
             return System.UInt32.MinValue;
@@ -39,7 +38,8 @@ namespace DTL.Random {
             x = y;
             y = z;
             z = w;
-            return w = (w ^ (w >> 19)) ^ (t ^ (t << 8));
+            w = (w ^ (w >> 19)) ^ (t ^ (t << 8));
+            return w;
         }
 
         public uint Next(uint max) {
@@ -53,15 +53,20 @@ namespace DTL.Random {
             return min + Next() % (max - min);
         }
 
-        public XorShift128(uint? w = null) {
-            if (w == null) {
-                rand = new System.Random();
-                w = (uint)rand.Next();
+        private void Init(uint gen) {
+            x ^= gen;
+            y ^= gen;
+            z ^= gen;
+            w ^= gen;
+        }
+
+        public XorShift128(uint? seed = null) {
+            if (seed == null) {
+                rand = new System.Random((int) DateTime.Now.Ticks);
+                seed = (uint) rand.Next();
             }
-            else {
-                rand = new System.Random((int)w);
-                w = (uint) rand.Next();
-            }
+
+            Init((uint) seed);
         }
     }
 }

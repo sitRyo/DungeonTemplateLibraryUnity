@@ -16,6 +16,7 @@ using System;
 using DTL.Random;
 using DTL.Range;
 using DTL.Util;
+using UnityEngine;
 using MatrixRange = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 namespace DTL.Shape {
@@ -24,6 +25,11 @@ namespace DTL.Shape {
 
         public bool Draw(int[,] matrix) {
             return DrawNormal(matrix);
+        }
+
+        public int[,] Create(int[,] matrix) {
+            this.Draw(matrix);
+            return matrix;
         }
 
         private bool DrawNormal(int[,] matrix) {

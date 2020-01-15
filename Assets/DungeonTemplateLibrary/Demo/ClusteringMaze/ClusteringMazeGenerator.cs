@@ -28,5 +28,4 @@ public class ClusteringMazeGenerator : MonoBehaviour {
         clusteringMaze.Draw(matrix);
         new OutputConsole().Draw(matrix);
     }
-
 }

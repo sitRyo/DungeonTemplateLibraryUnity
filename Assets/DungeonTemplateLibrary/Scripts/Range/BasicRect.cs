@@ -39,13 +39,14 @@ namespace DTL.Range {
         }
 
         /* Constructors */
-        public BasicRect() { } // = default()
+        public BasicRect() {
+        } // = default()
 
         public BasicRect(MatrixRange matrixRange) {
-            this.startX = (uint)matrixRange.x;
-            this.startY = (uint)matrixRange.y;
-            this.width = (uint)matrixRange.w;
-            this.height = (uint)matrixRange.h;
+            this.startX = (uint) matrixRange.x;
+            this.startY = (uint) matrixRange.y;
+            this.width = (uint) matrixRange.w;
+            this.height = (uint) matrixRange.h;
         }
 
         public BasicRect(uint startX, uint startY, uint width, uint height) {
@@ -58,35 +59,41 @@ namespace DTL.Range {
         /* Clear */
         public TDerived ClearPointX() {
             this.startX = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearPointY() {
             this.startY = 0;
-            return (TDerived)this;
+            return (TDerived) this;
+        }
+
+        public TDerived ClearPoint() {
+            this.startX = 0;
+            this.startY = 0;
+            return (TDerived) this;
         }
 
         public TDerived ClearWidth() {
             this.width = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearHeight() {
             this.height = 0;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearLength() {
             ClearWidth();
             ClearHeight();
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived ClearRange() {
             ClearLength();
             ClearPointX();
             ClearPointY();
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         /* Getter */
@@ -144,34 +151,34 @@ namespace DTL.Range {
 
         public TDerived SetPointX(uint startX) {
             this.startX = startX;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived SetPointY(uint startY) {
             this.startY = startY;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived SetWidth(uint width) {
             this.width = width;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived SetHeight(uint height) {
             this.height = height;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived SetPoint(uint point) {
-            this.height = point;
-            this.width = point;
-            return (TDerived)this;
+            this.startX = point;
+            this.startY = point;
+            return (TDerived) this;
         }
 
         public TDerived SetPoint(uint startX, uint startY) {
-            this.height = startX;
-            this.width = startY;
-            return (TDerived)this;
+            this.startX = startX;
+            this.startY = startY;
+            return (TDerived) this;
         }
 
         public TDerived SetRange(uint startX, uint startY, uint length) {
@@ -179,7 +186,7 @@ namespace DTL.Range {
             this.startY = startY;
             this.width = length;
             this.height = length;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived SetRange(uint startX, uint startY, uint width, uint height) {
@@ -187,16 +194,15 @@ namespace DTL.Range {
             this.startY = startY;
             this.width = width;
             this.height = height;
-            return (TDerived)this;
+            return (TDerived) this;
         }
 
         public TDerived SetRange(MatrixRange matrixRange) {
-            this.startX = (uint)matrixRange.x;
-            this.startY = (uint)matrixRange.y;
-            this.width = (uint)matrixRange.w;
-            this.height = (uint)matrixRange.h;
-            return (TDerived)this;
+            this.startX = (uint) matrixRange.x;
+            this.startY = (uint) matrixRange.y;
+            this.width = (uint) matrixRange.w;
+            this.height = (uint) matrixRange.h;
+            return (TDerived) this;
         }
     }
 }
-

@@ -22,7 +22,7 @@ namespace DTL.Util {
     public class TerrainUtil {
         public Terrain terrain { get; private set; }
         public TerrainData terrainData { get; private set; }
-        public List<float> textureToHeight;
+        public List<float> textureToHeight { get; set; }
         public int depth { get; set; }
         public int width { get; set; }
         public int height { get; set; }
@@ -42,8 +42,8 @@ namespace DTL.Util {
 
         private void Generate() {
             matrix = new float[height, width];
-            Smooth(matrix, smooth);
             terrainGenerator.DrawNormalize(matrix);
+            Smooth(matrix, smooth);
         }
 
         // 各種情報の設定
@@ -98,8 +98,7 @@ namespace DTL.Util {
                 int mid = (left + right) / 2;
                 if (value > list[mid]) {
                     left = mid;
-                }
-                else {
+                } else {
                     right = mid;
                 }
             }
@@ -110,18 +109,14 @@ namespace DTL.Util {
         // 最初にheightMapとテクスチャの関係が指定されなかったときに呼ばれる関数
         private void SetTextureToHeight() {
             var len = this.texture2D.Count;
-            Debug.Log(len);
             this.textureToHeight = new List<float>();
             var hValue = 0.0f;
-            var dh = (float) 1.0f / len;
+            var dh = (float)1.0f / len;
 
             this.textureToHeight.Add(hValue);
             for (int i = 1; i < len; ++i)
-                textureToHeight.Add(hValue + i*dh);
+                textureToHeight.Add(hValue + i * dh);
 
-            foreach (var a in textureToHeight) {
-                Debug.Log(a);
-            }
         }
 
         public void Smooth(float[,] heightMap, uint iterationNum) {

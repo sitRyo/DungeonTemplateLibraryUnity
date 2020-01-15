@@ -180,10 +180,6 @@ namespace DTL.Util {
             for (int i = 0; i < 256; ++i) {
                 this.p[256 + i] = this.p[i];
             }
-
-            for (int i = 0; i < 10; ++i) {
-                Debug.Log(p[i]);
-            }
         }
 
         /* Constructor */

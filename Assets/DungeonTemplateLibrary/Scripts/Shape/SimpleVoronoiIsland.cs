@@ -21,9 +21,9 @@ namespace DTL.Shape {
     public class SimpleVoronoiIsland : IDrawer<int> {
         private RandomBase rand = new RandomBase();
         private VoronoiDiagram voronoiDiagram;
-        public int landValue { get; set; }
-        public int seaValue { get; set; }
-        public double probability { get; set; }
+        public int landValue { get; protected set; }
+        public int seaValue { get; protected set; }
+        public double probability { get; protected set; }
 
         bool isIsland(Pair point_, uint sx_, uint sy_, uint w_, uint h_, uint numerator_, uint denominator_) {
             return (int)point_.First > ((w_ - sx_) * numerator_ / denominator_ + sx_) &&

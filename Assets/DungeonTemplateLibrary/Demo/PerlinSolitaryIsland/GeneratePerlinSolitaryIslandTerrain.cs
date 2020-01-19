@@ -12,20 +12,20 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
+using UnityEngine;
 using System.Collections.Generic;
 using DTL.Shape;
 using DTL.Util;
-using UnityEngine;
 
 public class GeneratePerlinSolitaryIslandTerrain : MonoBehaviour {
-    public int depth = 50;
-    public int height = 48;
-    public int width = 32;
+    public int depth = 250;
+    public int height = 512;
+    public int width = 512;
 
-    public double truncatedProportion = 0.8;
+    public double truncatedProportion = 0.5;
     public double mountainProportion = 0.4;
-    public double frequency = 6.0;
-    public uint octaves = 8;
+    public double frequency = 4.0;
+    public uint octaves = 2;
     public int maxHeight = 60;
     public List<Texture2D> texture2D = new List<Texture2D>();
 
@@ -36,7 +36,7 @@ public class GeneratePerlinSolitaryIslandTerrain : MonoBehaviour {
         perlinSolitaryIsland =
             new PerlinSolitaryIsland(truncatedProportion, mountainProportion, frequency, octaves, maxHeight);
         this.terrain = GetComponent<Terrain>();
-        TerrainUtil terrainUtil = new TerrainUtil(terrain, texture2D, perlinSolitaryIsland, height, width, depth);
+        TerrainUtil terrainUtil = new TerrainUtil(terrain, texture2D, perlinSolitaryIsland, height, width, depth, 1);
         terrainUtil.Draw();
     }
 }

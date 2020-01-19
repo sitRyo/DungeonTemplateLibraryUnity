@@ -19,12 +19,12 @@ using DTL.Util;
 using UnityEngine;
 
 public class GenerateFractalIslandTerrain : MonoBehaviour {
-    public int depth = 20;
-    public int width = 48;
-    public int height = 48;
+    public int depth = 50;
+    public int width = 512;
+    public int height = 512;
     public int minValue = 10;
-    public int altitude = 150;
-    public int addAltitude = 75;
+    public int altitude = 60;
+    public int addAltitude = 10;
 
     private Terrain terrain;
     private FractalIsland fractalIsland;
@@ -35,7 +35,7 @@ public class GenerateFractalIslandTerrain : MonoBehaviour {
     void Start() {
         fractalIsland = new FractalIsland(minValue, altitude, addAltitude);
         this.terrain = GetComponent<Terrain>();
-        TerrainUtil terrainUtil = new TerrainUtil(terrain, texture2D, fractalIsland, height, width, depth);
+        TerrainUtil terrainUtil = new TerrainUtil(terrain, texture2D, fractalIsland, height, width, depth, 2);
         terrainUtil.Draw();
     }
 }

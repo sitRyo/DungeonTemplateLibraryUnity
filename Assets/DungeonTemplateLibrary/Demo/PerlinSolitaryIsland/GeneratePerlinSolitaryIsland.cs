@@ -19,17 +19,21 @@ using DTL.Shape;
 public class GeneratePerlinSolitaryIsland : MonoBehaviour {
     public int height = 48;
     public int width = 32;
+    public double frequency = 6.0;
+    public double truncatedProportion = 0.8;
+    public double mountainProportion = 0.4;
+    public uint octaves = 8;
+    public int maxHeight = 60;
 
     private PerlinSolitaryIsland perlinSolitaryIsland;
 
     private void Start () {
         var matrix = new int[height, width];
-        perlinSolitaryIsland = new PerlinSolitaryIsland(0.8, 0.4, 6.0, 8, 60);
+        perlinSolitaryIsland = new PerlinSolitaryIsland(truncatedProportion, mountainProportion, frequency, octaves, maxHeight);
         perlinSolitaryIsland.Draw(matrix);
 
         new OutputConsole().Draw(matrix);
     }
-
 
 }
 

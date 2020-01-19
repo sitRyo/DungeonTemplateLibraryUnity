@@ -140,6 +140,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad06123e8178d741bf3fdd77e0ed394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 60
+  height: 60
+  divisionMin: 6
+  divisionRandMax: 4
+  roomMinX: 6
+  roomRandMaxX: 2
+  roomMinY: 6
+  roomRandMaxY: 2
   Floor: {fileID: 1311880330287372, guid: 7e4d83b35abef3b42a9d8674c5928c24, type: 2}
   Wall: {fileID: 1068176529699966, guid: 1d6fa0a25197ff24db8a469ea03573bc, type: 2}
 --- !u!4 &393507455
@@ -229,8 +237,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 787328182}
-  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: 23, y: 25, z: 7}
+  m_LocalRotation: {x: -0.6981533, y: 0.0011697965, z: -0.00114043, w: -0.7159465}
+  m_LocalPosition: {x: 27.340923, y: 60.11993, z: 30.747887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -299,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a54e7ae14ece749859c3b6eb46e3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 50
-  width: 50
+  height: 30
+  width: 30
   drawValue: 40
   trueColor: 1
   falseColor: 0

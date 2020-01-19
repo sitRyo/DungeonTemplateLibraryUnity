@@ -19,12 +19,12 @@ using DTL.Random;
 using DTL.Util;
 
 public class GenerateTerrain : MonoBehaviour {
-    public int depth = 20;
-    public int width = 64;
-    public int height = 64;
-    public int minValue = 10;
-    public int altitude = 150;
-    public int addAltitude = 75;
+    public int depth = 350;
+    public int width = 1024;
+    public int height = 1024;
+    public int minValue = 20;
+    public int altitude = 100;
+    public int addAltitude = 400;
 
     private Terrain terrain;
     private DiamondSquareAverageIsland diamondSquaeAverageIsland;
@@ -35,7 +35,7 @@ public class GenerateTerrain : MonoBehaviour {
         diamondSquaeAverageIsland = new DiamondSquareAverageIsland(minValue, altitude, addAltitude);
         this.terrain = GetComponent<Terrain>();
         TerrainUtil terrainUtil =
-            new TerrainUtil(terrain, texture2D, diamondSquaeAverageIsland, height + 1, width + 1, depth);
+            new TerrainUtil(terrain, texture2D, diamondSquaeAverageIsland, height + 1, width + 1, depth, 3);
         terrainUtil.Draw();
     }
 }

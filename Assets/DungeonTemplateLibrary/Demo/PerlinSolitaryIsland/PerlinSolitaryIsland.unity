@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.41
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_TemporalCoherenceThreshold: 1
-    m_EnvironmentLightingMode: 0
+    m_EnvironmentLightingMode: 1
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
@@ -142,6 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 48
   width: 32
+  frequency: 6
+  truncatedProportion: 0.8
+  mountainProportion: 0.4
+  octaves: 8
+  maxHeight: 60
 --- !u!4 &582084032
 Transform:
   m_ObjectHideFlags: 0
@@ -229,24 +234,24 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 638683913}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.3318553, y: 0.4126653, z: -0.16464669, w: 0.8321483}
+  m_LocalPosition: {x: -73.79675, y: 406.35748, z: 0.6383362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &828490482
+--- !u!1 &671215076
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 828490485}
-  - component: {fileID: 828490484}
-  - component: {fileID: 828490483}
-  - component: {fileID: 828490486}
+  - component: {fileID: 671215079}
+  - component: {fileID: 671215078}
+  - component: {fileID: 671215080}
+  - component: {fileID: 671215077}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -254,25 +259,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!154 &828490483
+--- !u!154 &671215077
 TerrainCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 828490482}
+  m_GameObject: {fileID: 671215076}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: f15932f958f6d1c45849a90b941cb213, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: ec8ac7196d9e34a4694de7ce1de34781, type: 2}
   m_EnableTreeColliders: 1
---- !u!218 &828490484
+--- !u!218 &671215078
 Terrain:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 828490482}
+  m_GameObject: {fileID: 671215076}
   m_Enabled: 1
   serializedVersion: 3
-  m_TerrainData: {fileID: 15600000, guid: f15932f958f6d1c45849a90b941cb213, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: ec8ac7196d9e34a4694de7ce1de34781, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -295,12 +300,12 @@ Terrain:
   m_BakeLightProbesForTrees: 1
   m_ScaleInLightmap: 0.0512
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
---- !u!4 &828490485
+--- !u!4 &671215079
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 828490482}
+  m_GameObject: {fileID: 671215076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -308,29 +313,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &828490486
+--- !u!114 &671215080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 828490482}
+  m_GameObject: {fileID: 671215076}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fecf0a5a9edbc14f8092c2bde455a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 500
-  height: 1024
-  width: 1024
-  truncatedProportion: 0.8
+  depth: 250
+  height: 512
+  width: 512
+  truncatedProportion: 0.5
   mountainProportion: 0.4
-  frequency: 6
-  octaves: 8
+  frequency: 4
+  octaves: 2
   maxHeight: 60
-  texture2D:
-  - {fileID: 2800000, guid: ef5c51cfa2ce46043a41a376b560c525, type: 3}
-  - {fileID: 2800000, guid: c6e0767b1f8c34890ac245217f4b9731, type: 3}
-  - {fileID: 2800000, guid: 0a45c60f961954cf49cbc3cde58c6d27, type: 3}
+  texture2D: []
 --- !u!1 &1258846425
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +358,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30

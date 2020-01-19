@@ -12,17 +12,16 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
-using System;
-using DTL.Shape;
-using DTL.Random;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+
 using DTL.Util;
+using DTL.Shape;
 
 public class GeneratePerlinIslandTerrain : MonoBehaviour {
-    public int depth = 50;
-    public int height = 200;
-    public int width = 200;
+    public int depth = 200;
+    public int height = 1024;
+    public int width = 1024;
     public double frequency = 6.0;
     public uint octaves = 8;
     public int maxHeight = 150;

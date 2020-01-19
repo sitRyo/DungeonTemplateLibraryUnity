@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6dd3e9f1bb66a4eac4da495c97c747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 48
-  width: 64
+  height: 30
+  width: 30
   landValue: 1
   seaValue: 0
   voronoiPointNum: 50

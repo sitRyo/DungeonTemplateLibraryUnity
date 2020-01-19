@@ -12,7 +12,6 @@
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #######################################################################################*/
 
-using System;
 using DTL.Console;
 using UnityEngine;
 using DTL.Shape;
@@ -20,8 +19,14 @@ using RangeMatrix = DTL.Base.Coordinate2DimensionalAndLength2Dimensional;
 
 public class GenerateSimpleRogueLikeDungeon : MonoBehaviour {
 
-    private const int width = 48;
-    private const int height = 36;
+    public int width = 48;
+    public int height = 36;
+    public uint divisionMin = 4;
+    public uint divisionRandMax = 4;
+    public uint roomMinX = 5;
+    public uint roomRandMaxX = 2;
+    public uint roomMinY = 5;
+    public uint roomRandMaxY = 2;
 
     /*#################################################################################
      * SimpleRogueLike Constructor
@@ -34,7 +39,8 @@ public class GenerateSimpleRogueLikeDungeon : MonoBehaviour {
      * roomMinY : 部屋のY軸の最小値 (Minimum value of room's Y axis)
      * roomRandMaxY : 部屋のY軸の振れ幅 (roomMinY + roomRandMaxY equals to maximum number of room's Y axis)
      *#################################################################################*/
-    private SimpleRogueLike simpleRogueLike = new SimpleRogueLike(1, 2, 4, 5, 5, 2, 5, 2);
+    private SimpleRogueLike simpleRogueLike;
+
 
     //    private SimpleRogueLike simpleRogueLike = new SimpleRogueLike();
     //    private SimpleRogueLike simpleRogueLike = new SimpleRogueLike(1);
@@ -50,6 +56,8 @@ public class GenerateSimpleRogueLikeDungeon : MonoBehaviour {
 
     private void Start() {
         int[,] matrix = new int[height, width];
+        simpleRogueLike 
+            = new SimpleRogueLike(1, 2, divisionMin, divisionRandMax, roomMinX, roomRandMaxX, roomMinY, roomRandMaxY);
         simpleRogueLike.Draw(matrix);
         new OutputConsole().Draw(matrix);
         DungeonInstantiate(matrix);

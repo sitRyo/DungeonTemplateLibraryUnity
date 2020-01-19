@@ -35,9 +35,12 @@ namespace DTL.Util {
         public void Draw() {
             Generate();
             SetTerrainData();
-            var textureMap = GetTexture(matrix, terrainData.alphamapWidth, terrainData.alphamapHeight);
+            float[,,] textureMap;
             terrainData.SetHeights(0, 0, matrix);
-            terrainData.SetAlphamaps(0, 0, textureMap);
+            if (this.texture2D.Count > 0) {
+                textureMap = GetTexture(matrix, terrainData.alphamapWidth, terrainData.alphamapHeight);
+                terrainData.SetAlphamaps(0, 0, textureMap);
+            }
         }
 
         private void Generate() {

@@ -33,7 +33,7 @@ public class EditorMain : EditorWindow {
     private int octaves;
     private int maxHeight;
 
-    [MenuItem("DTL/Editor Main")]
+//    [MenuItem("DTL/Editor Main")]
     public static void ShowWindow() {
         EditorWindow.GetWindow(typeof(EditorMain));
     }

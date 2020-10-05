@@ -1,20 +1,16 @@
 # Dungeon Template Library for Unity [![BSL-1.0](https://img.shields.io/badge/license-BSL--1.0-blue.svg)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
 
-[![Unity](https://kasugaccho.github.io/DungeonPicture/Picture/Unity/logo_unity_240.gif)](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)
+[![Unity](https://raw.githubusercontent.com/Kasugaccho/Kasugaccho/master/Picture/dungeon_template_library_unity.png)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
 ---
 
-# Overview 💬
-
-## [API reference 📚](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
-
-[**>> API reference 📚**](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
+# [API reference 📚](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
 [![Unity](https://github.com/Kasugaccho/DungeonPicture/blob/master/Picture/Unity/Screenshot/rl540.gif)](https://github.com/sitRyo/DungeonTemplateLibraryUnity/wiki/API-reference)
 
 ---
 
-## Support Unity Version 🔧
+# Support Unity Version 🔧
 
 Unity 2018.1.3 -
 
@@ -22,7 +18,7 @@ Unity 2018.1.3 -
 
 ---
 
-## [License 💳](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
+# [License 💳](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
 
 [>> View License 💳](https://github.com/sitRyo/DungeonTemplateLibraryUnity/blob/master/LICENSE_1_0.txt)
 
@@ -35,8 +31,4 @@ Distributed under the Boost Software License, Version 1.0.(See accompanying file
 
 # Related Item 🎮
 
-|[**[[ C++ Graphics Library ]]**](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)|
-|:---:|
-|[![cpp](https://kasugaccho.github.io/DungeonPicture/Picture/Logo/logo_cppgl_240.gif)](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/API-reference)|
-|[**[[ Unreal Engine ]]**](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/Unreal-Engine-4)|
-|[![UE4](https://kasugaccho.github.io/DungeonPicture/Picture/UE4/logo_unreal_240.gif)](https://github.com/Kasugaccho/DungeonTemplateLibrary/wiki/Unreal-Engine-4)|
+[![DTL](https://raw.githubusercontent.com/Kasugaccho/Kasugaccho/master/Picture/dungeon_template_library.png)](https://github.com/Kasugaccho/DungeonTemplateLibrary)
